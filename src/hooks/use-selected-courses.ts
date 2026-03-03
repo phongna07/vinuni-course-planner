@@ -20,13 +20,14 @@ function validateStoredCourses(storedCourses: Course[]): Course[] {
     // Find the corresponding course in master data by Course code and Section code
     const masterCourse = masterCourses.find(
       (mc) =>
-        mc.Course === storedCourse.Course && mc.Section === storedCourse.Section
+        mc.Course === storedCourse.Course &&
+        mc.Section === storedCourse.Section,
     );
 
     // If course doesn't exist in master data, remove it
     if (!masterCourse) {
       console.warn(
-        `Course ${storedCourse.Course} section ${storedCourse.Section} not found in master data. Removing from saved courses.`
+        `Course ${storedCourse.Course} section ${storedCourse.Section} not found in master data. Removing from saved courses.`,
       );
       return false;
     }
@@ -43,7 +44,7 @@ function validateStoredCourses(storedCourses: Course[]): Course[] {
 
     if (!dataMatches) {
       console.warn(
-        `Course ${storedCourse.Course} section ${storedCourse.Section} data has changed. Removing from saved courses.`
+        `Course ${storedCourse.Course} section ${storedCourse.Section} data has changed. Removing from saved courses.`,
       );
       return false;
     }
@@ -71,7 +72,7 @@ export function useSelectedCourses() {
           console.info(
             `Removed ${
               parsed.length - validatedCourses.length
-            } outdated course(s) from saved selection.`
+            } outdated course(s) from saved selection.`,
           );
         }
 
@@ -90,7 +91,7 @@ export function useSelectedCourses() {
       try {
         // Store without conflict info (will be recalculated on load)
         const toStore = selectedCourses.map(
-          ({ id, hasConflict, conflictsWith, ...course }) => course
+          ({ id, hasConflict, conflictsWith, ...course }) => course,
         );
         localStorage.setItem(STORAGE_KEY, JSON.stringify(toStore));
       } catch (error) {
@@ -123,18 +124,22 @@ export function useSelectedCourses() {
     setSelectedCourses([]);
   }, []);
 
+  const replaceAllCourses = useCallback((courses: Course[]) => {
+    setSelectedCourses(updateCoursesWithConflicts(courses));
+  }, []);
+
   const isCourseSelected = useCallback(
     (sectionId: string) => {
       return selectedCourses.some((c) => c.Section === sectionId);
     },
-    [selectedCourses]
+    [selectedCourses],
   );
 
   const isCourseCodeSelected = useCallback(
     (courseCode: string) => {
       return selectedCourses.some((c) => c.Course === courseCode);
     },
-    [selectedCourses]
+    [selectedCourses],
   );
 
   return {
@@ -142,6 +147,7 @@ export function useSelectedCourses() {
     addCourse,
     removeCourse,
     clearAllCourses,
+    replaceAllCourses,
     isCourseSelected,
     isCourseCodeSelected,
     isLoaded,
