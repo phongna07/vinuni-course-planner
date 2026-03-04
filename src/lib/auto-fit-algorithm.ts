@@ -43,6 +43,8 @@ export interface AutoFitInput {
   optionalElectiveTitles: string[];
   /** Maximum total credits allowed */
   maxCredits: number;
+  /** Number of schedule combinations to generate (default: 5) */
+  numCombinations?: number;
 }
 
 export interface AutoFitResult {
@@ -164,8 +166,13 @@ function fillElectives(
  * 6. De-duplicates and returns up to 5 unique combinations.
  */
 export function autoFitSchedule(input: AutoFitInput): AutoFitResult {
-  const { allCourses, mandatoryTitles, optionalElectiveTitles, maxCredits } =
-    input;
+  const {
+    allCourses,
+    mandatoryTitles,
+    optionalElectiveTitles,
+    maxCredits,
+    numCombinations = 5,
+  } = input;
 
   // Filter out 0-credit courses, then group by title
   const creditCourses = allCourses.filter((c) => parseFloat(c.Credits) > 0);
@@ -205,8 +212,8 @@ export function autoFitSchedule(input: AutoFitInput): AutoFitResult {
     };
   }
 
-  const MAX_ATTEMPTS = 80;
-  const TARGET_COMBINATIONS = 5;
+  const TARGET_COMBINATIONS = Math.max(1, numCombinations);
+  const MAX_ATTEMPTS = Math.max(80, TARGET_COMBINATIONS * 16);
   const seen = new Set<string>();
   const combinations: Course[][] = [];
 

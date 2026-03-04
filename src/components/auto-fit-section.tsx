@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, useRef, useCallback } from "react";
+import { useState, useEffect, useMemo, useRef, useCallback } from "react";
 import {
   Wand2,
   X,
@@ -12,6 +12,7 @@ import {
   Sparkles,
   ListPlus,
   Star,
+  TriangleAlert,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -44,6 +45,8 @@ import {
 import { Course } from "@/types/course";
 import { hasValidSchedule, calculateTotalCredits } from "@/lib/schedule-utils";
 import { autoFitSchedule } from "@/lib/auto-fit-algorithm";
+
+const AUTOFIT_STORAGE_KEY = "vinuni-autofit-config";
 
 interface AutoFitSectionProps {
   allCourses: Course[];
@@ -244,12 +247,80 @@ export function AutoFitSection({ allCourses, onApply }: AutoFitSectionProps) {
   >([]);
   const [mandatoryTitles, setMandatoryTitles] = useState<string[]>([]);
   const [maxCredits, setMaxCredits] = useState(18);
+  const [numCombinations, setNumCombinations] = useState(5);
   const [results, setResults] = useState<Course[][] | null>(null);
   const [message, setMessage] = useState<string | null>(null);
   const [isRunning, setIsRunning] = useState(false);
   const [appliedIndex, setAppliedIndex] = useState<number | null>(null);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   const allTitles = useMemo(() => getUniqueTitles(allCourses), [allCourses]);
+
+  // Load from localStorage on mount (once allTitles is available)
+  useEffect(() => {
+    if (allTitles.length === 0) return;
+    try {
+      const stored = localStorage.getItem(AUTOFIT_STORAGE_KEY);
+      if (stored) {
+        const parsed = JSON.parse(stored) as {
+          mandatoryTitles?: string[];
+          optionalElectiveTitles?: string[];
+          maxCredits?: number;
+          numCombinations?: number;
+        };
+        const validTitles = new Set(allTitles);
+
+        // Validate titles against current course data
+        const validMandatory = (parsed.mandatoryTitles ?? []).filter((t) =>
+          validTitles.has(t),
+        );
+        const mandatorySet = new Set(validMandatory);
+        // Ensure mutual exclusivity
+        const validElectives = (parsed.optionalElectiveTitles ?? []).filter(
+          (t) => validTitles.has(t) && !mandatorySet.has(t),
+        );
+
+        setMandatoryTitles(validMandatory);
+        setOptionalElectiveTitles(validElectives);
+        if (typeof parsed.maxCredits === "number" && parsed.maxCredits > 0) {
+          setMaxCredits(parsed.maxCredits);
+        }
+        if (
+          typeof parsed.numCombinations === "number" &&
+          parsed.numCombinations > 0
+        ) {
+          setNumCombinations(parsed.numCombinations);
+        }
+      }
+    } catch (error) {
+      console.error("Failed to load auto-fit config from localStorage:", error);
+    }
+    setIsLoaded(true);
+  }, [allTitles]);
+
+  // Save to localStorage whenever config changes
+  useEffect(() => {
+    if (!isLoaded) return;
+    try {
+      localStorage.setItem(
+        AUTOFIT_STORAGE_KEY,
+        JSON.stringify({
+          mandatoryTitles,
+          optionalElectiveTitles,
+          maxCredits,
+          numCombinations,
+        }),
+      );
+    } catch (error) {
+      console.error("Failed to save auto-fit config to localStorage:", error);
+    }
+  }, [
+    mandatoryTitles,
+    optionalElectiveTitles,
+    maxCredits,
+    numCombinations,
+    isLoaded,
+  ]);
   const optionalElectiveSet = useMemo(
     () => new Set(optionalElectiveTitles),
     [optionalElectiveTitles],
@@ -303,13 +374,20 @@ export function AutoFitSection({ allCourses, onApply }: AutoFitSectionProps) {
         mandatoryTitles,
         optionalElectiveTitles,
         maxCredits,
+        numCombinations,
       });
 
       setResults(result.combinations);
       setMessage(result.message ?? null);
       setIsRunning(false);
     }, 50);
-  }, [allCourses, mandatoryTitles, optionalElectiveTitles, maxCredits]);
+  }, [
+    allCourses,
+    mandatoryTitles,
+    optionalElectiveTitles,
+    maxCredits,
+    numCombinations,
+  ]);
 
   const handleApply = useCallback(
     (index: number) => {
@@ -336,6 +414,15 @@ export function AutoFitSection({ allCourses, onApply }: AutoFitSectionProps) {
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
+          {/* Warning */}
+          <div className="flex items-start gap-3 rounded-lg border border-yellow-500/40 bg-yellow-50 px-4 py-3 text-sm text-yellow-800 dark:border-yellow-500/30 dark:bg-yellow-950/40 dark:text-yellow-200">
+            <TriangleAlert className="mt-0.5 h-4 w-4 shrink-0 text-yellow-600 dark:text-yellow-400" />
+            <p>
+              Don&apos;t trust this tool 100%. Please double-check the generated
+              schedule and verify that the assigned sections match your desired
+              learning pathway.
+            </p>
+          </div>
           {/* Configuration area */}
           <div className="grid gap-6 md:grid-cols-2">
             <CourseTitleSelect
@@ -360,7 +447,7 @@ export function AutoFitSection({ allCourses, onApply }: AutoFitSectionProps) {
             />
           </div>
 
-          {/* Max credits input */}
+          {/* Max credits & number of combinations inputs */}
           <div className="flex items-end gap-4">
             <div className="space-y-2 w-48">
               <Label htmlFor="max-credits" className="text-sm font-medium">
@@ -376,6 +463,27 @@ export function AutoFitSection({ allCourses, onApply }: AutoFitSectionProps) {
                   const val = parseInt(e.target.value, 10);
                   if (!isNaN(val) && val > 0) {
                     setMaxCredits(val);
+                    setResults(null);
+                    setMessage(null);
+                    setAppliedIndex(null);
+                  }
+                }}
+              />
+            </div>
+            <div className="space-y-2 w-48">
+              <Label htmlFor="num-combinations" className="text-sm font-medium">
+                Number of Combinations
+              </Label>
+              <Input
+                id="num-combinations"
+                type="number"
+                min={1}
+                max={50}
+                value={numCombinations}
+                onChange={(e) => {
+                  const val = parseInt(e.target.value, 10);
+                  if (!isNaN(val) && val > 0) {
+                    setNumCombinations(val);
                     setResults(null);
                     setMessage(null);
                     setAppliedIndex(null);
