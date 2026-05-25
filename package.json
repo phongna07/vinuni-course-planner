@@ -3,8 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "parse": "node scripts/parse-courses.js",
+    "dev": "node scripts/parse-courses.js && next dev",
+    "build": "node scripts/parse-courses.js && next build",
     "start": "next start",
     "lint": "eslint"
   },
@@ -54,7 +55,8 @@
     "sonner": "^2.0.7",
     "tailwind-merge": "^3.4.0",
     "vaul": "^1.1.2",
-    "zod": "^4.2.0"
+    "zod": "^4.2.0",
+    "cheerio": "^1.0.0"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
