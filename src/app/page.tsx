@@ -21,6 +21,9 @@ import { AutoFitSection } from "@/components/auto-fit-section";
 
 const courses = coursesData as Course[];
 
+// Update this date whenever the course data is refreshed
+const LAST_UPDATED_DATE = "May 25 2026";
+
 export default function Home() {
   const [filtersOpen, setFiltersOpen] = useState(false);
 
@@ -60,6 +63,13 @@ export default function Home() {
       </header>
 
       <main className="container mx-auto px-4 py-6">
+        {/* Update Warning */}
+        <div className="mb-6 p-4 bg-amber-50 dark:bg-amber-950 border border-amber-200 dark:border-amber-800 rounded-lg">
+          <p className="text-sm text-amber-900 dark:text-amber-100">
+            <span className="font-semibold">📋 Course Data Notice:</span> The course schedule was last updated on <span className="font-medium">{LAST_UPDATED_DATE}</span>. Please note that schedules may change at any time. We recommend double-checking course information on SIS before finalizing your registration.
+          </p>
+        </div>
+
         {/* Course Selector */}
         <section className="mb-6">
           {/* Title row with filter button at flex-end */}

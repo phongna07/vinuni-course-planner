@@ -3,8 +3,8 @@
 import { useState, useEffect } from "react";
 import { Clock } from "lucide-react";
 
-// Target: December 18, 2025 at 2:00 PM (14:00) in GMT+7
-const TARGET_DATE = new Date("2025-12-18T14:00:00+07:00");
+// Target: June 29, 2026 at 00:01 AM (00:01) in GMT+7
+const TARGET_DATE = new Date("2026-06-29T00:01:00+07:00");
 
 interface TimeLeft {
   days: number;
@@ -92,7 +92,7 @@ export function CountdownTimer() {
       </div>
 
       <p className="text-center text-sm text-muted-foreground mt-4">
-        December 18, 2025 • 2:00 PM (GMT+7)
+        June 29, 2026 • 00:01 AM (GMT+7)
       </p>
     </div>
   );
