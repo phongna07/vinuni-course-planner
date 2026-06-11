@@ -19,25 +19,6 @@
         ]
     },
     {
-        "Course": "CECS1040",
-        "Course Title": "Introduction to AI Literacy",
-        "Section": "IALSU262",
-        "Dates": "7/1/2026 to 8/28/2026",
-        "Credits": "2.00",
-        "Instructor": "Zengchang Qin",
-        "Delivery Method": "Classroom",
-        "Schedule": [
-            {
-                "day": "Tuesday",
-                "time": "1:30PM to 3:30PM"
-            },
-            {
-                "day": "Thursday",
-                "time": "1:30PM to 3:30PM"
-            }
-        ]
-    },
-    {
         "Course": "IDEA1011",
         "Course Title": "Big Ideas: AI and the Knowledge Revolution",
         "Section": "BAKSU261",
@@ -70,7 +51,7 @@
         "Course": "HASS1010",
         "Course Title": "Marxism-Leninism Philosophy (Philosophy Science and Society)",
         "Section": "PSSSU261",
-        "Dates": "7/1/2026 to 8/7/2026",
+        "Dates": "7/1/2026 to 8/28/2026",
         "Credits": "3.00",
         "Instructor": "Duc Pham Minh",
         "Delivery Method": "Classroom",
@@ -89,7 +70,7 @@
         "Course": "HASS1010",
         "Course Title": "Marxism-Leninism Philosophy (Philosophy Science and Society)",
         "Section": "PSSSU262",
-        "Dates": "7/1/2026 to 8/7/2026",
+        "Dates": "7/1/2026 to 8/28/2026",
         "Credits": "3.00",
         "Instructor": "Minh Nguyen Quang",
         "Delivery Method": "Classroom",
@@ -139,21 +120,6 @@
             {
                 "day": "Thursday",
                 "time": "1:30AM to 3:20AM"
-            }
-        ]
-    },
-    {
-        "Course": "HASS1041",
-        "Course Title": "Ho Chi Minh Ideology (Vietnam: History and Culture II)",
-        "Section": "HC2SU261",
-        "Dates": "7/1/2026 to 8/28/2026",
-        "Credits": "2.00",
-        "Instructor": "Hoai Tran Khai",
-        "Delivery Method": "Classroom",
-        "Schedule": [
-            {
-                "day": "Thursday",
-                "time": "2:00PM to 5:00PM"
             }
         ]
     },
@@ -259,10 +225,29 @@
         "Course": "VCOR1030 ##",
         "Course Title": "National Defense Education (for Vietnamese citizen only)",
         "Section": "NDESU261",
-        "Dates": "7/1/2026 to 9/30/2026",
+        "Dates": "9/3/2026 to 9/19/2026",
         "Credits": "0.00",
         "Instructor": "Lien Trinh Thi Thuy",
         "Delivery Method": "Classroom",
         "Schedule": []
+    },
+    {
+        "Course": "ENGL1030",
+        "Course Title": "Academic and Professional Writing",
+        "Section": "APWSU261",
+        "Dates": "7/6/2026 to 8/28/2026",
+        "Credits": "2.00",
+        "Instructor": "Hobbs Donald",
+        "Delivery Method": "Classroom",
+        "Schedule": [
+            {
+                "day": "Monday",
+                "time": "1:30PM to 3:00PM"
+            },
+            {
+                "day": "Wednesday",
+                "time": "1:30PM to 3:00PM"
+            }
+        ]
     }
 ]

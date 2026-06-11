@@ -22,7 +22,7 @@ import { AutoFitSection } from "@/components/auto-fit-section";
 const courses = coursesData as Course[];
 
 // Update this date whenever the course data is refreshed
-const LAST_UPDATED_DATE = "May 25 2026";
+const LAST_UPDATED_DATE = "Jun 11 2026";
 
 export default function Home() {
   const [filtersOpen, setFiltersOpen] = useState(false);
