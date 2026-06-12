@@ -73,8 +73,6 @@ function getCourseColor(courseCode: string): string {
 
 export function WeeklyCalendar({ courses }: WeeklyCalendarProps) {
   const isMobile = useIsMobile();
-  const timeLabels = useMemo(() => generateTimeLabels(), []);
-  const totalHours = CALENDAR_END_HOUR - CALENDAR_START_HOUR;
 
   // Parse all course schedules into calendar blocks
   const calendarBlocks = useMemo(() => {
@@ -110,12 +108,43 @@ export function WeeklyCalendar({ courses }: WeeklyCalendarProps) {
     return grouped;
   }, [calendarBlocks]);
 
+  const visibleBlocks = useMemo(() => blocksByDay.flat(), [blocksByDay]);
+
+  const calendarRange = useMemo(() => {
+    if (visibleBlocks.length === 0) {
+      return {
+        startHour: CALENDAR_START_HOUR,
+        endHour: CALENDAR_END_HOUR,
+      };
+    }
+
+    const earliestStartHour = Math.min(
+      ...visibleBlocks.map((block) => block.slot.startHour)
+    );
+    const latestEndHour = Math.max(
+      ...visibleBlocks.map((block) =>
+        block.slot.endMinute > 0 ? block.slot.endHour + 1 : block.slot.endHour
+      )
+    );
+
+    return {
+      startHour: Math.min(CALENDAR_START_HOUR, earliestStartHour),
+      endHour: Math.max(CALENDAR_END_HOUR, latestEndHour),
+    };
+  }, [visibleBlocks]);
+
+  const timeLabels = useMemo(
+    () => generateTimeLabels(calendarRange.startHour, calendarRange.endHour),
+    [calendarRange]
+  );
+  const totalHours = calendarRange.endHour - calendarRange.startHour;
+
   // Calculate position and size for a block
   const getBlockStyle = (slot: ParsedTimeSlot) => {
     const startOffset =
-      (slot.startHour - CALENDAR_START_HOUR) * 60 + slot.startMinute;
+      (slot.startHour - calendarRange.startHour) * 60 + slot.startMinute;
     const endOffset =
-      (slot.endHour - CALENDAR_START_HOUR) * 60 + slot.endMinute;
+      (slot.endHour - calendarRange.startHour) * 60 + slot.endMinute;
     const duration = endOffset - startOffset;
 
     const totalMinutes = totalHours * 60;

@@ -209,11 +209,14 @@ export function formatTime(hour: number, minute: number = 0): string {
 }
 
 /**
- * Generate time labels for calendar (7 AM to 10 PM)
+ * Generate time labels for calendar.
  */
-export function generateTimeLabels(): string[] {
+export function generateTimeLabels(
+  startHour: number = CALENDAR_START_HOUR,
+  endHour: number = CALENDAR_END_HOUR
+): string[] {
   const labels: string[] = [];
-  for (let hour = CALENDAR_START_HOUR; hour < CALENDAR_END_HOUR; hour++) {
+  for (let hour = startHour; hour < endHour; hour++) {
     labels.push(formatTime(hour));
   }
   return labels;
