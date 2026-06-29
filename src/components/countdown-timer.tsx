@@ -3,8 +3,8 @@
 import { useState, useEffect } from "react";
 import { Clock } from "lucide-react";
 
-// Target: June 29, 2026 at 02:00 PM (14:00) in GMT+7
-const TARGET_DATE = new Date("2026-06-29T14:00:00+07:00");
+// Target: June 30, 2026 at 02:00 PM (14:00) in GMT+7
+const TARGET_DATE = new Date("2026-06-30T14:00:00+07:00");
 
 interface TimeLeft {
   days: number;
