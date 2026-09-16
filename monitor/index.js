@@ -13,7 +13,7 @@ const COURSE_LIST_PATH =
 
 const AUTH_PATH = path.join(__dirname, 'auth.json');
 const RAW_DATA_PATH = path.join(__dirname, '..', 'scripts', 'raw-data.js');
-const TOKEN_CAPTURE_TIMEOUT_MS = 30_000;
+const TOKEN_CAPTURE_TIMEOUT_MS = 60_000;
 const COURSE_LIMIT = 100;
 const COURSE_SORT = {
     maHocPhan: 1,

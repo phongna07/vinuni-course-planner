@@ -224,6 +224,21 @@
     {
         "Course": "BIOL1013",
         "Course Title": "Human Biology",
+        "Section": "HBLFA2612",
+        "Dates": "10/30/2026 to 1/1/2027",
+        "Credits": "3.00",
+        "Instructor": "Nguyễn Thị Nhung, To Thanh Thuy, Nguyen Xuan Hung",
+        "Delivery Method": "Classroom",
+        "Schedule": [
+            {
+                "day": "Friday",
+                "time": "3:30PM to 5:30PM"
+            }
+        ]
+    },
+    {
+        "Course": "BIOL1013",
+        "Course Title": "Human Biology",
         "Section": "HBLFA262",
         "Dates": "9/21/2026 to 12/30/2026",
         "Credits": "3.00",
@@ -261,6 +276,21 @@
                 "day": "Wednesday",
                 "time": "1:30PM to 4:20PM"
             },
+            {
+                "day": "Friday",
+                "time": "3:30PM to 5:30PM"
+            }
+        ]
+    },
+    {
+        "Course": "BIOL1013",
+        "Course Title": "Human Biology",
+        "Section": "HBLFA2634",
+        "Dates": "11/6/2026 to 1/1/2027",
+        "Credits": "3.00",
+        "Instructor": "To Thanh Thuy, Nguyen Xuan Hung, Nguyễn Thị Nhung",
+        "Delivery Method": "Classroom",
+        "Schedule": [
             {
                 "day": "Friday",
                 "time": "3:30PM to 5:30PM"
@@ -339,7 +369,7 @@
         "Course": "CAS3010",
         "Course Title": "Global Development and Sustainability",
         "Section": "GDSFAL261",
-        "Dates": "9/18/2026 to 1/15/2027",
+        "Dates": "9/25/2026 to 1/15/2027",
         "Credits": "2.00",
         "Instructor": "Khuc Van Quy",
         "Delivery Method": "Classroom",
@@ -384,7 +414,7 @@
         "Course": "CECS1040",
         "Course Title": "Introduction to AI Literacy",
         "Section": "IALFA261",
-        "Dates": "9/15/2026 to 12/22/2026",
+        "Dates": "9/22/2026 to 12/22/2026",
         "Credits": "2.00",
         "Instructor": "Rolley Matthew Henry",
         "Delivery Method": "Classroom",
@@ -399,7 +429,7 @@
         "Course": "CECS1040",
         "Course Title": "Introduction to AI Literacy",
         "Section": "IALFA262",
-        "Dates": "9/16/2026 to 12/23/2026",
+        "Dates": "9/23/2026 to 12/23/2026",
         "Credits": "2.00",
         "Instructor": "Qin Zengchang",
         "Delivery Method": "Classroom",
@@ -414,7 +444,7 @@
         "Course": "CECS1040",
         "Course Title": "Introduction to AI Literacy",
         "Section": "IALFA263",
-        "Dates": "9/18/2026 to 12/25/2026",
+        "Dates": "9/25/2026 to 12/25/2026",
         "Credits": "2.00",
         "Instructor": "Soriano Marcolino Leandro",
         "Delivery Method": "Classroom",
@@ -429,7 +459,7 @@
         "Course": "CECS1040",
         "Course Title": "Introduction to AI Literacy",
         "Section": "IALFA264",
-        "Dates": "9/18/2026 to 12/25/2026",
+        "Dates": "9/25/2026 to 12/25/2026",
         "Credits": "2.00",
         "Instructor": "Phùng Mạnh Dương",
         "Delivery Method": "Classroom",
@@ -444,7 +474,7 @@
         "Course": "CECS1050",
         "Course Title": "Introduction to Data Literacy",
         "Section": "IDLFA261",
-        "Dates": "9/15/2026 to 12/22/2026",
+        "Dates": "9/22/2026 to 12/22/2026",
         "Credits": "2.00",
         "Instructor": "Nguyễn Phước Quý Duy, Lý Quang Việt",
         "Delivery Method": "Classroom",
@@ -459,7 +489,7 @@
         "Course": "CECS1050",
         "Course Title": "Introduction to Data Literacy",
         "Section": "IDLFA262",
-        "Dates": "9/18/2026 to 12/25/2026",
+        "Dates": "9/25/2026 to 12/25/2026",
         "Credits": "2.00",
         "Instructor": "Nguyễn Phước Quý Duy, Lý Quang Việt",
         "Delivery Method": "Classroom",
@@ -798,52 +828,6 @@
             {
                 "day": "Friday",
                 "time": "1:30PM to 4:20PM"
-            }
-        ]
-    },
-    {
-        "Course": "COMP1010",
-        "Course Title": "Introduction to Programming",
-        "Section": "IPRFA261",
-        "Dates": "9/22/2026 to 12/31/2026",
-        "Credits": "4.00",
-        "Instructor": "Wong Kok Seng",
-        "Delivery Method": "Classroom",
-        "Schedule": [
-            {
-                "day": "Tuesday",
-                "time": "9:00AM to 10:15AM"
-            },
-            {
-                "day": "Wednesday",
-                "time": "10:30AM to 12:20PM"
-            },
-            {
-                "day": "Thursday",
-                "time": "9:00AM to 10:15AM"
-            }
-        ]
-    },
-    {
-        "Course": "COMP1010",
-        "Course Title": "Introduction to Programming",
-        "Section": "IPRFA262",
-        "Dates": "9/22/2026 to 12/31/2026",
-        "Credits": "4.00",
-        "Instructor": "Wong Kok Seng",
-        "Delivery Method": "Classroom",
-        "Schedule": [
-            {
-                "day": "Tuesday",
-                "time": "9:00AM to 10:15AM"
-            },
-            {
-                "day": "Wednesday",
-                "time": "3:00PM to 4:50PM"
-            },
-            {
-                "day": "Thursday",
-                "time": "9:00AM to 10:15AM"
             }
         ]
     },
@@ -1572,6 +1556,36 @@
     {
         "Course": "ENGL1030",
         "Course Title": "Academic and Professional Writing",
+        "Section": "APWFA2610",
+        "Dates": "9/21/2026 to 1/18/2027",
+        "Credits": "2.00",
+        "Instructor": "Donald Hobbs",
+        "Delivery Method": "Classroom",
+        "Schedule": [
+            {
+                "day": "Monday",
+                "time": "2:00PM to 3:50PM"
+            }
+        ]
+    },
+    {
+        "Course": "ENGL1030",
+        "Course Title": "Academic and Professional Writing",
+        "Section": "APWFA2611",
+        "Dates": "9/22/2026 to 1/19/2027",
+        "Credits": "2.00",
+        "Instructor": "Donald Hobbs",
+        "Delivery Method": "Classroom",
+        "Schedule": [
+            {
+                "day": "Tuesday",
+                "time": "11:00AM to 12:50PM"
+            }
+        ]
+    },
+    {
+        "Course": "ENGL1030",
+        "Course Title": "Academic and Professional Writing",
         "Section": "APWFA262",
         "Dates": "9/22/2026 to 1/21/2027",
         "Credits": "2.00",
@@ -2007,17 +2021,47 @@
         ]
     },
     {
+        "Course": "HASS1020",
+        "Course Title": "Marxism-Leninism Political Economy",
+        "Section": "MPEFA264",
+        "Dates": "9/21/2026 to 11/9/2026",
+        "Credits": "2.00",
+        "Instructor": "Pham Anh",
+        "Delivery Method": "Classroom",
+        "Schedule": [
+            {
+                "day": "Monday",
+                "time": "9:00AM to 1:00PM"
+            }
+        ]
+    },
+    {
+        "Course": "HASS1020",
+        "Course Title": "Marxism-Leninism Political Economy",
+        "Section": "MPEFA265",
+        "Dates": "9/21/2026 to 11/9/2026",
+        "Credits": "2.00",
+        "Instructor": "Nguyen Huy Tham",
+        "Delivery Method": "Classroom",
+        "Schedule": [
+            {
+                "day": "Monday",
+                "time": "1:00PM to 5:00PM"
+            }
+        ]
+    },
+    {
         "Course": "HASS1030",
         "Course Title": "Scientific Socialism",
         "Section": "SCSFA261",
-        "Dates": "9/23/2026 to 11/11/2026",
+        "Dates": "9/22/2026 to 11/10/2026",
         "Credits": "2.00",
         "Instructor": "Do Thi Thach",
         "Delivery Method": "Classroom",
         "Schedule": [
             {
-                "day": "Wednesday",
-                "time": "9:00AM to 1:00PM"
+                "day": "Tuesday",
+                "time": "1:00PM to 5:00PM"
             }
         ]
     },
@@ -2042,12 +2086,27 @@
         "Section": "SCSFA263",
         "Dates": "9/22/2026 to 11/10/2026",
         "Credits": "2.00",
-        "Instructor": "Pham Thi Vien",
+        "Instructor": "Khuat Thi Thanh Van",
         "Delivery Method": "Classroom",
         "Schedule": [
             {
                 "day": "Tuesday",
                 "time": "1:00PM to 5:00PM"
+            }
+        ]
+    },
+    {
+        "Course": "HASS1030",
+        "Course Title": "Scientific Socialism",
+        "Section": "SCSFA264",
+        "Dates": "9/21/2026 to 11/9/2026",
+        "Credits": "2.00",
+        "Instructor": "Pham Giang",
+        "Delivery Method": "Classroom",
+        "Schedule": [
+            {
+                "day": "Monday",
+                "time": "9:00AM to 1:00PM"
             }
         ]
     },
@@ -2311,13 +2370,28 @@
         "Course Title": "Statics and Mechanics of Solids",
         "Section": "BTPFA261",
         "Dates": "9/23/2026 to 1/6/2027",
-        "Credits": "4.00",
+        "Credits": "2.00",
         "Instructor": "Tyler Dalton McNabb",
         "Delivery Method": "Classroom",
         "Schedule": [
             {
                 "day": "Wednesday",
                 "time": "9:00AM to 10:50AM"
+            }
+        ]
+    },
+    {
+        "Course": "IDEA1022",
+        "Course Title": "Big Ideas: Introduction to Digital Humanities, Society, and Space",
+        "Section": "BIDH261",
+        "Dates": "9/22/2026 to 1/19/2027",
+        "Credits": "2.00",
+        "Instructor": "Geroge Grekousis",
+        "Delivery Method": "Classroom",
+        "Schedule": [
+            {
+                "day": "Tuesday",
+                "time": "1:00PM to 2:50PM"
             }
         ]
     },
@@ -2834,52 +2908,6 @@
     {
         "Course": "MATH1010",
         "Course Title": "Calculus I",
-        "Section": "CA1FA261",
-        "Dates": "9/21/2026 to 12/30/2026",
-        "Credits": "4.00",
-        "Instructor": "Nguyễn Ngọc Doanh",
-        "Delivery Method": "Classroom",
-        "Schedule": [
-            {
-                "day": "Monday",
-                "time": "9:00AM to 10:15AM"
-            },
-            {
-                "day": "Tuesday",
-                "time": "10:30AM to 12:20PM"
-            },
-            {
-                "day": "Wednesday",
-                "time": "9:00AM to 10:15AM"
-            }
-        ]
-    },
-    {
-        "Course": "MATH1010",
-        "Course Title": "Calculus I",
-        "Section": "CA1FA262",
-        "Dates": "9/21/2026 to 1/1/2027",
-        "Credits": "4.00",
-        "Instructor": "Nguyễn Ngọc Doanh",
-        "Delivery Method": "Classroom",
-        "Schedule": [
-            {
-                "day": "Monday",
-                "time": "9:00AM to 10:15AM"
-            },
-            {
-                "day": "Wednesday",
-                "time": "9:00AM to 10:15AM"
-            },
-            {
-                "day": "Friday",
-                "time": "3:30PM to 5:20PM"
-            }
-        ]
-    },
-    {
-        "Course": "MATH1010",
-        "Course Title": "Calculus I",
         "Section": "CA1FA263",
         "Dates": "9/21/2026 to 12/30/2026",
         "Credits": "4.00",
@@ -3187,52 +3215,6 @@
             {
                 "day": "Friday",
                 "time": "2:00PM to 3:50PM"
-            }
-        ]
-    },
-    {
-        "Course": "MATH2050",
-        "Course Title": "Linear Algebra",
-        "Section": "LIAFA261",
-        "Dates": "9/21/2026 to 12/31/2026",
-        "Credits": "4.00",
-        "Instructor": "Nguyễn Ngọc Doanh",
-        "Delivery Method": "Classroom",
-        "Schedule": [
-            {
-                "day": "Monday",
-                "time": "1:30PM to 2:45PM"
-            },
-            {
-                "day": "Wednesday",
-                "time": "1:30PM to 2:45PM"
-            },
-            {
-                "day": "Thursday",
-                "time": "1:30PM to 3:20PM"
-            }
-        ]
-    },
-    {
-        "Course": "MATH2050",
-        "Course Title": "Linear Algebra",
-        "Section": "LIAFA262",
-        "Dates": "9/21/2026 to 1/1/2027",
-        "Credits": "4.00",
-        "Instructor": "Nguyễn Ngọc Doanh",
-        "Delivery Method": "Classroom",
-        "Schedule": [
-            {
-                "day": "Monday",
-                "time": "1:30PM to 2:45PM"
-            },
-            {
-                "day": "Wednesday",
-                "time": "1:30PM to 2:45PM"
-            },
-            {
-                "day": "Friday",
-                "time": "10:30AM to 12:20PM"
             }
         ]
     },
@@ -5388,14 +5370,14 @@
         "Course": "NURS2222",
         "Course Title": "Health Tech & Innovations",
         "Section": "HTIFA261",
-        "Dates": "9/14/2026 to 12/28/2026",
+        "Dates": "9/21/2026 to 1/4/2027",
         "Credits": "2.00",
         "Instructor": "Pham Thi Ngoc",
         "Delivery Method": "Classroom",
         "Schedule": [
             {
                 "day": "Monday",
-                "time": "9:00AM to 12:30PM"
+                "time": "9:00AM to 12:00PM"
             }
         ]
     },
@@ -5803,6 +5785,21 @@
         ]
     },
     {
+        "Course": "PSYC1010",
+        "Course Title": "Introduction to Psychology",
+        "Section": "ITPFA262",
+        "Dates": "9/23/2026 to 12/30/2026",
+        "Credits": "2.00",
+        "Instructor": "Spektor Mikhail Sergeevic",
+        "Delivery Method": "Classroom",
+        "Schedule": [
+            {
+                "day": "Wednesday",
+                "time": "10:00AM to 11:50AM"
+            }
+        ]
+    },
+    {
         "Course": "PSYC2030",
         "Course Title": "Social Psychology",
         "Section": "SOPFA261",
@@ -6039,6 +6036,51 @@
             {
                 "day": "Wednesday",
                 "time": "1:30PM to 3:20PM"
+            }
+        ]
+    },
+    {
+        "Course": "THINK1010",
+        "Course Title": "Critical and Creative Thinking",
+        "Section": "CCTFA264",
+        "Dates": "11/9/2026 to 1/4/2027",
+        "Credits": "2.00",
+        "Instructor": "Michael John Clark",
+        "Delivery Method": "Classroom",
+        "Schedule": [
+            {
+                "day": "Monday",
+                "time": "9:00AM to 12:30PM"
+            }
+        ]
+    },
+    {
+        "Course": "THINK1010",
+        "Course Title": "Critical and Creative Thinking",
+        "Section": "CCTFA265",
+        "Dates": "11/9/2026 to 1/4/2027",
+        "Credits": "2.00",
+        "Instructor": "Collin James",
+        "Delivery Method": "Classroom",
+        "Schedule": [
+            {
+                "day": "Monday",
+                "time": "1:00PM to 4:30PM"
+            }
+        ]
+    },
+    {
+        "Course": "THINK1010",
+        "Course Title": "Critical and Creative Thinking",
+        "Section": "CCTFA266",
+        "Dates": "11/10/2026 to 1/5/2027",
+        "Credits": "2.00",
+        "Instructor": "Collin James",
+        "Delivery Method": "Classroom",
+        "Schedule": [
+            {
+                "day": "Tuesday",
+                "time": "1:00PM to 4:30PM"
             }
         ]
     },
