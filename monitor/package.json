@@ -7,6 +7,7 @@
   "scripts": {
     "headless": "node index.js --headless=true",
     "headed": "node index.js --headless=false",
+    "install:chromium": "playwright install --with-deps chromium",
     "login": "node login.js",
     "test": "node --test index.test.js"
   },
