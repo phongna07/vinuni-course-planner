@@ -2,7 +2,7 @@
 
 ## Project Structure & Module Organization
 
-This Next.js 16 App Router project keeps routes and global styles in `src/app/`. Feature components belong in `src/components/`, while reusable shadcn/Radix primitives are under `src/components/ui/`. Put shared logic in `src/lib/`, client state hooks in `src/hooks/`, and domain types in `src/types/`. Static files belong in `public/`.
+This Next.js 16 App Router project keeps routes and global styles in `src/app/`. Feature components belong in `src/components/`, while reusable shadcn/Radix primitives are under `src/components/ui/`. Put shared logic in `src/lib/`, client state hooks in `src/hooks/`, domain types in `src/types/`, locale configuration in `src/i18n/`, and translated messages in `src/messages/`. Static files belong in `public/`.
 
 Course records in `src/data/` are generated from `scripts/index.html` by `scripts/parse-courses.js`; do not edit the JSON outputs manually. Parser tests live beside the script in `scripts/parse-courses.test.js`.
 
@@ -21,6 +21,18 @@ Use Bun, matching the committed `bun.lock`:
 ## Coding Style & Naming Conventions
 
 TypeScript runs in strict mode. Follow existing formatting: two-space indentation, semicolons, double quotes in TypeScript/TSX, and single quotes in CommonJS parser files. Use `PascalCase` for React components and types, `camelCase` for functions and variables, and kebab-case filenames such as `weekly-calendar.tsx`. Name hooks with a `use-` filename and `use...` export. Prefer the `@/` alias for imports from `src/`, and reuse `src/components/ui/` primitives before adding new controls.
+
+## Internationalization Guidelines
+
+Treat internationalization as part of every user-facing change. English is the default language at `/`, and Vietnamese is available at `/vi`. Both routes must remain statically generated under `output: "export"`; do not introduce middleware/proxy locale routing, cookies, headers, redirects, browser-language detection, or other request-time locale behavior. When adding a public page, provide corresponding literal static routes for both locales and keep language-switch navigation aligned with them.
+
+- Add or update every user-facing string in both `src/messages/en.json` and `src/messages/vi.json`. Do not hardcode application copy in components, hooks, or workers.
+- Use `next-intl` APIs such as `useTranslations` and `useFormatter`. Prefer ICU interpolation, selects, and plurals over string concatenation, and use locale-aware formatting for visible dates, times, and numbers.
+- Organize keys by feature and reuse shared namespaces such as `Common` and `Days`. Keep English and Vietnamese keys and ICU placeholders identical; `src/i18n/messages.test.ts` enforces this parity.
+- Localize accessibility labels, tooltips, toasts, loading/empty/error states, dialogs, and text supplied by shared UI primitives. Return structured reason codes and values from workers or domain logic, then translate them at the UI boundary; log raw exceptions only for developers.
+- Keep internal weekday and domain identifiers language-neutral or in their existing canonical English form, translating only their display labels. Preserve storage keys across locales so state survives navigation between `/` and `/vi`.
+- Unless a task explicitly changes the translation scope, leave official course titles, codes, sections, instructors, raw catalog records, page metadata, copied course-list content, and downloaded `.ics` content in English. Preserve proper names such as VinUni, VinUniversity, VinUniDigi, and VinUni Course Planner.
+- For user-facing changes, verify both locales, the correct `<html lang>` value, language switching, and relevant responsive states. Run `bun run test`, `bunx tsc --noEmit`, and `bun run build`, and confirm the build reports both `/` and `/vi` as static routes.
 
 ## Testing Guidelines
 
