@@ -2144,13 +2144,17 @@
         "Course": "HASS1041",
         "Course Title": "Ho Chi Minh Ideology",
         "Section": "HIDFA263",
-        "Dates": "9/18/2026 to 11/6/2026",
+        "Dates": "9/13/2026 to 11/6/2026",
         "Credits": "2.00",
         "Instructor": "Le Thi Thao",
         "Delivery Method": "Classroom",
         "Schedule": [
             {
                 "day": "Friday",
+                "time": "1:00PM to 5:00PM"
+            },
+            {
+                "day": "Sunday",
                 "time": "1:00PM to 5:00PM"
             }
         ]
