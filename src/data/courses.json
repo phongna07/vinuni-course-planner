@@ -834,6 +834,52 @@
     {
         "Course": "COMP1010",
         "Course Title": "Introduction to Programming",
+        "Section": "IPRFA261",
+        "Dates": "9/22/2026 to 12/31/2026",
+        "Credits": "4.00",
+        "Instructor": "Wong Kok Seng",
+        "Delivery Method": "Classroom",
+        "Schedule": [
+            {
+                "day": "Tuesday",
+                "time": "9:00AM to 10:15AM"
+            },
+            {
+                "day": "Wednesday",
+                "time": "10:30AM to 12:20PM"
+            },
+            {
+                "day": "Thursday",
+                "time": "9:00AM to 10:15AM"
+            }
+        ]
+    },
+    {
+        "Course": "COMP1010",
+        "Course Title": "Introduction to Programming",
+        "Section": "IPRFA262",
+        "Dates": "9/22/2026 to 12/31/2026",
+        "Credits": "4.00",
+        "Instructor": "Wong Kok Seng",
+        "Delivery Method": "Classroom",
+        "Schedule": [
+            {
+                "day": "Tuesday",
+                "time": "9:00AM to 10:15AM"
+            },
+            {
+                "day": "Wednesday",
+                "time": "3:00PM to 4:50PM"
+            },
+            {
+                "day": "Thursday",
+                "time": "9:00AM to 10:15AM"
+            }
+        ]
+    },
+    {
+        "Course": "COMP1010",
+        "Course Title": "Introduction to Programming",
         "Section": "IPRFA263",
         "Dates": "9/22/2026 to 1/1/2027",
         "Credits": "4.00",
@@ -2906,6 +2952,52 @@
             {
                 "day": "Thursday",
                 "time": "8:00AM to 12:00PM"
+            }
+        ]
+    },
+    {
+        "Course": "MATH1010",
+        "Course Title": "Calculus I",
+        "Section": "CA1FA261",
+        "Dates": "9/21/2026 to 12/30/2026",
+        "Credits": "4.00",
+        "Instructor": "Nguyễn Ngọc Doanh",
+        "Delivery Method": "Classroom",
+        "Schedule": [
+            {
+                "day": "Monday",
+                "time": "9:00AM to 10:15AM"
+            },
+            {
+                "day": "Tuesday",
+                "time": "10:30AM to 12:20PM"
+            },
+            {
+                "day": "Wednesday",
+                "time": "9:00AM to 10:15AM"
+            }
+        ]
+    },
+    {
+        "Course": "MATH1010",
+        "Course Title": "Calculus I",
+        "Section": "CA1FA262",
+        "Dates": "9/21/2026 to 1/1/2027",
+        "Credits": "4.00",
+        "Instructor": "Nguyễn Ngọc Doanh",
+        "Delivery Method": "Classroom",
+        "Schedule": [
+            {
+                "day": "Monday",
+                "time": "9:00AM to 10:15AM"
+            },
+            {
+                "day": "Wednesday",
+                "time": "9:00AM to 10:15AM"
+            },
+            {
+                "day": "Friday",
+                "time": "3:30PM to 5:20PM"
             }
         ]
     },
@@ -5994,6 +6086,21 @@
         "Schedule": [
             {
                 "day": "Friday",
+                "time": "1:30PM to 4:30PM"
+            }
+        ]
+    },
+    {
+        "Course": "STAT2020",
+        "Course Title": "Business Statistics",
+        "Section": "BSTFA264",
+        "Dates": "9/21/2026 to 12/28/2026",
+        "Credits": "3.00",
+        "Instructor": "Nguyen Thanh Cong",
+        "Delivery Method": "Classroom",
+        "Schedule": [
+            {
+                "day": "Monday",
                 "time": "1:30PM to 4:30PM"
             }
         ]
