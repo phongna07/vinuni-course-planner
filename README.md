@@ -27,11 +27,13 @@ VinUni Course Planner is an independent web app for exploring Fall 2026 course s
 - Copyable plain-text course list
 - Conflict-free `.ics` export with recurring class events and reminders
 - Registration countdown, responsive layout, and light/dark themes
+- English and Vietnamese interfaces at `/` and `/vi`
 - Visible course-data update date and stale-data warning
 
 ## Tech stack
 
 - [Next.js 16](https://nextjs.org/) with the App Router
+- [next-intl](https://next-intl.dev/) for typed English and Vietnamese messages
 - [React 19](https://react.dev/) and strict TypeScript
 - [Tailwind CSS 4](https://tailwindcss.com/)
 - [Radix UI](https://www.radix-ui.com/) and shadcn/ui components
@@ -153,6 +155,8 @@ When the stored session expires, rerun `bun run monitor:login` and the same `gh 
 src/app/          Routes, layout, metadata, and global styles
 src/components/   Course-planning features and UI components
 src/hooks/        Persistent selection and filter state
+src/i18n/         Locale configuration and static next-intl request setup
+src/messages/      English and Vietnamese message catalogs
 src/lib/          Schedule, conflict, and iCalendar utilities
 src/types/        Course domain types
 src/data/         Generated course data and metadata

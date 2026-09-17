@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import { useTranslations } from "next-intl";
 import {
   Check,
   ChevronsUpDown,
@@ -25,7 +26,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Badge } from "@/components/ui/badge";
-import { Course } from "@/types/course";
+import { Course, DayOfWeek } from "@/types/course";
 import {
   courseMatchesTimeFilter,
   coursesConflict,
@@ -44,10 +45,13 @@ interface CourseSelectorProps {
   resetFilters: () => void;
 }
 
-function formatSchedule(course: Course): string {
-  return course.Schedule.map((s) => `${s.day.slice(0, 3)} ${s.time}`).join(
-    ", "
-  );
+function formatSchedule(
+  course: Course,
+  formatDay: (day: DayOfWeek) => string,
+): string {
+  return course.Schedule.map(
+    (schedule) => `${formatDay(schedule.day)} ${schedule.time}`,
+  ).join(", ");
 }
 
 export function CourseSelector({
@@ -62,6 +66,9 @@ export function CourseSelector({
 }: CourseSelectorProps) {
   const [open, setOpen] = useState(false);
   const [searchValue, setSearchValue] = useState("");
+  const t = useTranslations("CourseSelector");
+  const tCommon = useTranslations("Common");
+  const tDays = useTranslations("Days");
 
   // Filter courses based on search value and time filters
   const filteredCourses = useMemo(() => {
@@ -121,7 +128,7 @@ export function CourseSelector({
           aria-expanded={open}
           className="w-full justify-between h-auto min-h-10 py-2"
         >
-          <span className="text-muted-foreground">Search for courses...</span>
+          <span className="text-muted-foreground">{t("trigger")}</span>
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
@@ -131,7 +138,7 @@ export function CourseSelector({
       >
         <Command shouldFilter={false}>
           <CommandInput
-            placeholder="Search by course code, title, instructor, or time..."
+            placeholder={t("placeholder")}
             value={searchValue}
             onValueChange={setSearchValue}
           />
@@ -140,7 +147,7 @@ export function CourseSelector({
               {hasActiveFilters ? (
                 <div className="py-6 text-center">
                   <p className="text-sm text-muted-foreground mb-2">
-                    No courses match your filters.
+                    {t("noFilterMatches")}
                   </p>
                   <Button
                     variant="link"
@@ -148,11 +155,11 @@ export function CourseSelector({
                     onClick={resetFilters}
                     className="text-primary"
                   >
-                    Reset filters
+                    {t("resetFilters")}
                   </Button>
                 </div>
               ) : (
-                "No courses found."
+                t("noCourses")
               )}
             </CommandEmpty>
             <CommandGroup>
@@ -162,7 +169,8 @@ export function CourseSelector({
                   course.Course
                 );
                 const instructorDisplayName = getInstructorDisplayName(
-                  course.Instructor
+                  course.Instructor,
+                  tCommon("unassigned"),
                 );
 
                 // Check for conflicts with selected courses
@@ -205,7 +213,9 @@ export function CourseSelector({
                           {course.Section}
                         </Badge>
                         <Badge variant="outline" className="text-xs">
-                          {course.Credits} credits
+                          {tCommon("credits", {
+                            count: Number.parseFloat(course.Credits),
+                          })}
                         </Badge>
                       </div>
                       {isSelected && (
@@ -228,20 +238,23 @@ export function CourseSelector({
                     <div className="flex items-center gap-1 text-xs text-muted-foreground">
                       <Clock className="h-3 w-3" />
                       <span className="line-clamp-1">
-                        {formatSchedule(course)}
+                        {formatSchedule(course, (day) =>
+                          tDays(`${day}Short`),
+                        )}
                       </span>
                     </div>
                     {hasConflict && !isSelected && (
                       <div className="flex items-center gap-1 mt-1 text-xs text-yellow-600 dark:text-yellow-400">
                         <AlertTriangle className="h-3 w-3" />
                         <span>
-                          Conflicts with:{" "}
-                          {conflictingCourses
+                          {t("conflictsWith", {
+                            courses: conflictingCourses
                             .map(
                               (conflictingCourse) =>
                                 `${conflictingCourse["Course Title"]} (${conflictingCourse.Section})`
                             )
-                            .join(", ")}
+                            .join(", "),
+                          })}
                         </span>
                       </div>
                     )}

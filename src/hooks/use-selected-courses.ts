@@ -6,6 +6,7 @@ import { updateCoursesWithConflicts } from "@/lib/schedule-utils";
 import coursesData from "@/data/courses.json";
 import { APP_CONFIG } from "@/config";
 import { toast } from "sonner";
+import { useTranslations } from "next-intl";
 
 // Master course data from courses.json
 const masterCourses = coursesData as Course[];
@@ -56,58 +57,68 @@ function validateStoredCourses(storedCourses: Course[]): Course[] {
 export function useSelectedCourses() {
   const [selectedCourses, setSelectedCourses] = useState<SelectedCourse[]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
+  const t = useTranslations("Toasts");
 
   // Load from localStorage on mount
   useEffect(() => {
-    try {
-      const stored = localStorage.getItem(
-        APP_CONFIG.storageKeys.selectedCourses,
-      );
-      if (stored) {
-        const parsed = JSON.parse(stored) as Course[];
-        // Validate stored courses against master data
-        const validatedCourses = validateStoredCourses(parsed);
+    const loadTimer = window.setTimeout(() => {
+      try {
+        const stored = localStorage.getItem(
+          APP_CONFIG.storageKeys.selectedCourses,
+        );
+        if (stored) {
+          const parsed = JSON.parse(stored) as Course[];
+          // Validate stored courses against master data
+          const validatedCourses = validateStoredCourses(parsed);
 
-        // If any courses were removed, update localStorage
-        if (validatedCourses.length !== parsed.length) {
-          const removedCount = parsed.length - validatedCourses.length;
+          // If any courses were removed, update localStorage
+          if (validatedCourses.length !== parsed.length) {
+            const removedCount = parsed.length - validatedCourses.length;
 
-          localStorage.setItem(
-            APP_CONFIG.storageKeys.selectedCourses,
-            JSON.stringify(validatedCourses),
-          );
-          console.info(
-            `Removed ${removedCount} outdated course(s) from saved selection.`,
-          );
-          window.setTimeout(() => {
-            toast.warning("Saved course data changed", {
+            localStorage.setItem(
+              APP_CONFIG.storageKeys.selectedCourses,
+              JSON.stringify(validatedCourses),
+            );
+            console.info(
+              `Removed ${removedCount} outdated course(s) from saved selection.`,
+            );
+            toast.warning(t("savedCoursesChanged"), {
               id: "outdated-saved-courses",
-              description: `${removedCount} outdated ${
-                removedCount === 1 ? "course was" : "courses were"
-              } removed from your saved selection. Please review your schedule.`,
+              description: t("outdatedCoursesRemoved", {
+                count: removedCount,
+              }),
               duration: 8000,
               closeButton: true,
             });
-          }, 0);
-        }
+          }
 
-        // Recalculate conflicts on load
-        setSelectedCourses(updateCoursesWithConflicts(validatedCourses));
+          // Recalculate conflicts on load
+          setSelectedCourses(updateCoursesWithConflicts(validatedCourses));
+        }
+      } catch (error) {
+        console.error("Failed to load courses from localStorage:", error);
       }
-    } catch (error) {
-      console.error("Failed to load courses from localStorage:", error);
-    }
-    setIsLoaded(true);
-  }, []);
+      setIsLoaded(true);
+    }, 0);
+
+    return () => window.clearTimeout(loadTimer);
+  }, [t]);
 
   // Save to localStorage whenever selectedCourses changes
   useEffect(() => {
     if (isLoaded) {
       try {
         // Store without conflict info (will be recalculated on load)
-        const toStore = selectedCourses.map(
-          ({ id, hasConflict, conflictsWith, ...course }) => course,
-        );
+        const toStore: Course[] = selectedCourses.map((course) => ({
+          Course: course.Course,
+          "Course Title": course["Course Title"],
+          Section: course.Section,
+          Dates: course.Dates,
+          Credits: course.Credits,
+          Instructor: course.Instructor,
+          "Delivery Method": course["Delivery Method"],
+          Schedule: course.Schedule,
+        }));
         localStorage.setItem(
           APP_CONFIG.storageKeys.selectedCourses,
           JSON.stringify(toStore),

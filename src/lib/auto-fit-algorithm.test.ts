@@ -366,7 +366,7 @@ test("reports when no optional course fits without returning an empty schedule",
   assert.equal(result.status, "optimal");
   assert.equal(result.bestOptionalCount, 0);
   assert.deepEqual(result.combinations, []);
-  assert.match(result.message ?? "", /No requested optional course/);
+  assert.deepEqual(result.message, { code: "no-optional-fit" });
 });
 
 test("normalizes duplicate keys, list overlap, result count, and invalid credits", () => {

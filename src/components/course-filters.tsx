@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo } from "react";
+import { useTranslations } from "next-intl";
 import { Filter, X, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -20,6 +21,7 @@ import { formatTime } from "@/lib/schedule-utils";
 import {
   CourseFilters as CourseFiltersType,
   TIME_PRESETS,
+  TimePresetKey,
 } from "@/hooks/use-course-filters";
 import { useIsMobile } from "@/hooks/use-mobile";
 
@@ -57,10 +59,18 @@ export function CourseFiltersTrigger({
   open: boolean;
   onToggle: () => void;
 }) {
+  const t = useTranslations("Filters");
+
   return (
-    <Button variant="outline" size="sm" className="gap-2" onClick={onToggle}>
+    <Button
+      variant="outline"
+      size="sm"
+      className="gap-2"
+      onClick={onToggle}
+      aria-label={t("title")}
+    >
       <Filter className="h-4 w-4" />
-      <span className="hidden sm:inline">Filters</span>
+      <span className="hidden sm:inline">{t("title")}</span>
       {hasActiveFilters && (
         <Badge variant="secondary" className="text-xs font-normal">
           {getFilterDescription()}
@@ -86,6 +96,8 @@ export function CourseFiltersContent({
   open,
 }: Omit<CourseFiltersProps, "getFilterDescription" | "onOpenChange">) {
   const isMobile = useIsMobile();
+  const t = useTranslations("Filters");
+  const tDays = useTranslations("Days");
 
   // Generate time options for selects (7 AM to 10 PM)
   const timeOptions = useMemo(() => {
@@ -105,18 +117,20 @@ export function CourseFiltersContent({
     <div className="p-3 sm:p-4 space-y-4 rounded-lg border bg-muted/30 animate-in fade-in slide-in-from-top-2 duration-200">
       {/* Preset Select */}
       <div className="space-y-2">
-        <Label className="text-xs text-muted-foreground">Quick Presets</Label>
+        <Label className="text-xs text-muted-foreground">
+          {t("quickPresets")}
+        </Label>
         <Select
           value={filters.preset || ""}
           onValueChange={(value) => applyPreset(value || null)}
         >
           <SelectTrigger className="w-full sm:w-60" size="sm">
-            <SelectValue placeholder="Select a preset..." />
+            <SelectValue placeholder={t("selectPreset")} />
           </SelectTrigger>
           <SelectContent>
-            {Object.entries(TIME_PRESETS).map(([key, preset]) => (
+            {(Object.keys(TIME_PRESETS) as TimePresetKey[]).map((key) => (
               <SelectItem key={key} value={key}>
-                {preset.label}
+                {t(key)}
               </SelectItem>
             ))}
           </SelectContent>
@@ -125,7 +139,7 @@ export function CourseFiltersContent({
 
       {/* Day Checkboxes */}
       <div className="space-y-2">
-        <Label className="text-xs text-muted-foreground">Days</Label>
+        <Label className="text-xs text-muted-foreground">{t("days")}</Label>
         <div className="grid grid-cols-4 sm:grid-cols-7 gap-2">
           {DAYS_OF_WEEK.map((day) => (
             <div key={day} className="flex items-center gap-1.5">
@@ -138,7 +152,9 @@ export function CourseFiltersContent({
                 htmlFor={`filter-day-${day}`}
                 className="text-xs cursor-pointer"
               >
-                {isMobile ? day.slice(0, 2) : day.slice(0, 3)}
+                {isMobile
+                  ? tDays(`${day}Narrow`)
+                  : tDays(`${day}Short`)}
               </Label>
             </div>
           ))}
@@ -147,11 +163,13 @@ export function CourseFiltersContent({
 
       {/* Time Range */}
       <div className="space-y-2">
-        <Label className="text-xs text-muted-foreground">Time Range</Label>
+        <Label className="text-xs text-muted-foreground">
+          {t("timeRange")}
+        </Label>
         <div className="flex flex-col sm:flex-row gap-2 items-start sm:items-center">
           <div className="flex items-center gap-2 w-full sm:w-auto">
             <span className="text-xs text-muted-foreground whitespace-nowrap">
-              After
+              {t("after")}
             </span>
             <Select
               value={filters.timeRange.startHour?.toString() || "any"}
@@ -163,10 +181,10 @@ export function CourseFiltersContent({
               }
             >
               <SelectTrigger className="w-full sm:w-28" size="sm">
-                <SelectValue placeholder="Any" />
+                <SelectValue placeholder={t("any")} />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="any">Any</SelectItem>
+                <SelectItem value="any">{t("any")}</SelectItem>
                 {timeOptions.map((opt) => (
                   <SelectItem key={opt.value} value={opt.value}>
                     {opt.label}
@@ -177,7 +195,7 @@ export function CourseFiltersContent({
           </div>
           <div className="flex items-center gap-2 w-full sm:w-auto">
             <span className="text-xs text-muted-foreground whitespace-nowrap">
-              Before
+              {t("before")}
             </span>
             <Select
               value={filters.timeRange.endHour?.toString() || "any"}
@@ -189,10 +207,10 @@ export function CourseFiltersContent({
               }
             >
               <SelectTrigger className="w-full sm:w-28" size="sm">
-                <SelectValue placeholder="Any" />
+                <SelectValue placeholder={t("any")} />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="any">Any</SelectItem>
+                <SelectItem value="any">{t("any")}</SelectItem>
                 {timeOptions.map((opt) => (
                   <SelectItem key={opt.value} value={opt.value}>
                     {opt.label}
@@ -206,7 +224,9 @@ export function CourseFiltersContent({
 
       {/* Options */}
       <div className="space-y-2">
-        <Label className="text-xs text-muted-foreground">Options</Label>
+        <Label className="text-xs text-muted-foreground">
+          {t("options")}
+        </Label>
         <div className="flex items-center space-x-2">
           <Checkbox
             id="hide-conflicts"
@@ -218,7 +238,7 @@ export function CourseFiltersContent({
             htmlFor="hide-conflicts"
             className="text-sm font-normal cursor-pointer"
           >
-            Hide conflicting courses
+            {t("hideConflicts")}
           </Label>
         </div>
       </div>
@@ -232,7 +252,7 @@ export function CourseFiltersContent({
           className="w-full sm:w-auto"
         >
           <X className="h-3 w-3 mr-1" />
-          Reset Filters
+          {t("reset")}
         </Button>
       )}
     </div>

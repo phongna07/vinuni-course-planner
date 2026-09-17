@@ -1,6 +1,7 @@
 "use client";
 
 import { Download } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import {
   Tooltip,
@@ -16,14 +17,15 @@ interface ExportCalendarButtonProps {
 }
 
 export function ExportCalendarButton({ courses }: ExportCalendarButtonProps) {
+  const t = useTranslations("ExportCalendar");
   const canExport = canExportCourses(courses);
   const hasConflicts = courses.some((c) => c.hasConflict);
   const noCourses = courses.length === 0;
 
   const getTooltipMessage = () => {
-    if (noCourses) return "Add courses to export";
-    if (hasConflicts) return "Resolve conflicts before exporting";
-    return "You can import this file into Outlook Calendar";
+    if (noCourses) return t("addCourses");
+    if (hasConflicts) return t("resolveConflicts");
+    return t("tooltip");
   };
 
   const handleExport = () => {
@@ -43,9 +45,10 @@ export function ExportCalendarButton({ courses }: ExportCalendarButtonProps) {
               className="gap-2"
               onClick={handleExport}
               disabled={!canExport}
+              aria-label={t("button")}
             >
               <Download className="h-4 w-4" />
-              <span className="hidden sm:inline">Export calendar file (.ics)</span>
+              <span className="hidden sm:inline">{t("button")}</span>
             </Button>
           </span>
         </TooltipTrigger>

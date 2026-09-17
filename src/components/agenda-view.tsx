@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo } from "react";
+import { useTranslations } from "next-intl";
 import { Card, CardContent } from "@/components/ui/card";
 import { DayOfWeek, ParsedTimeSlot, SelectedCourse } from "@/types/course";
 import {
@@ -22,6 +23,9 @@ interface AgendaItem {
 }
 
 export function AgendaView({ courses, days }: AgendaViewProps) {
+  const t = useTranslations("Schedule");
+  const tCommon = useTranslations("Common");
+  const tDays = useTranslations("Days");
   // Parse all course schedules and group by day
   const agendaByDay = useMemo(() => {
     const grouped: Map<string, AgendaItem[]> = new Map();
@@ -63,7 +67,7 @@ export function AgendaView({ courses, days }: AgendaViewProps) {
           <div key={day} className="space-y-2">
             {/* Day header */}
             <div className="sticky top-0 z-10 bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60 py-2 px-1 border-b">
-              <h3 className="font-semibold text-base">{day}</h3>
+              <h3 className="font-semibold text-base">{tDays(day)}</h3>
             </div>
 
             {/* Course cards for this day */}
@@ -116,7 +120,7 @@ export function AgendaView({ courses, days }: AgendaViewProps) {
                               {item.course.Course}
                               {item.course.hasConflict && (
                                 <span className="ml-2 text-xs font-normal text-red-600 dark:text-red-400">
-                                  (Conflict)
+                                  ({t("conflict")})
                                 </span>
                               )}
                             </div>
@@ -131,7 +135,8 @@ export function AgendaView({ courses, days }: AgendaViewProps) {
                               </span>
                               <span>
                                 {getInstructorDisplayName(
-                                  item.course.Instructor
+                                  item.course.Instructor,
+                                  tCommon("unassigned"),
                                 )}
                               </span>
                             </div>
@@ -144,7 +149,7 @@ export function AgendaView({ courses, days }: AgendaViewProps) {
               </div>
             ) : (
               <div className="px-1 py-3 text-sm text-muted-foreground italic">
-                No classes
+                {t("noClasses")}
               </div>
             )}
           </div>
@@ -154,7 +159,7 @@ export function AgendaView({ courses, days }: AgendaViewProps) {
       {/* Legend */}
       {courses.length > 0 && (
         <div className="mt-6 pt-4 border-t">
-          <h5 className="text-sm font-medium mb-2">Legend</h5>
+          <h5 className="text-sm font-medium mb-2">{t("legend")}</h5>
           <div className="flex flex-wrap gap-2">
             {courses.map((course) => (
               <div
@@ -182,9 +187,9 @@ export function AgendaView({ courses, days }: AgendaViewProps) {
       {/* Empty state */}
       {courses.length === 0 && (
         <div className="text-center py-12 text-muted-foreground">
-          <p>No scheduled courses to display.</p>
+          <p>{t("empty")}</p>
           <p className="text-sm mt-1">
-            Add courses with schedules to see them on the calendar.
+            {t("emptyHelp")}
           </p>
         </div>
       )}

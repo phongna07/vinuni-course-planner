@@ -21,6 +21,7 @@ import {
   X,
 } from "lucide-react";
 import { toast } from "sonner";
+import { useTranslations } from "next-intl";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -92,6 +93,7 @@ function CourseKeySelect({
 }: CourseKeySelectProps) {
   const [open, setOpen] = useState(false);
   const [search, setSearch] = useState("");
+  const t = useTranslations("AutoFit");
   const selectedSet = useMemo(() => new Set(selectedKeys), [selectedKeys]);
   const filteredOptions = useMemo(() => {
     const normalizedSearch = search.trim().toLowerCase();
@@ -120,7 +122,7 @@ function CourseKeySelect({
             <span className="truncate text-sm text-muted-foreground">
               {selectedKeys.length === 0
                 ? placeholder
-                : `${selectedKeys.length} course${selectedKeys.length === 1 ? "" : "s"} selected`}
+                : t("selectedCount", { count: selectedKeys.length })}
             </span>
             <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
           </Button>
@@ -131,13 +133,13 @@ function CourseKeySelect({
         >
           <Command shouldFilter={false}>
             <CommandInput
-              placeholder="Search by title or course code..."
+              placeholder={t("searchPlaceholder")}
               value={search}
               onValueChange={setSearch}
               disabled={disabled}
             />
             <CommandList className="max-h-[250px]">
-              <CommandEmpty>No courses found.</CommandEmpty>
+              <CommandEmpty>{t("noCourses")}</CommandEmpty>
               <CommandGroup>
                 {filteredOptions.map((courseKey) => {
                   const isSelected = selectedSet.has(courseKey);
@@ -188,7 +190,7 @@ function CourseKeySelect({
                 onClick={() => onToggle(courseKey)}
                 className="ml-0.5 rounded-full p-0.5 hover:bg-white/20"
                 disabled={disabled}
-                aria-label={`Remove ${courseKey}`}
+                aria-label={t("removeCourse", { course: courseKey })}
               >
                 <X className="h-3 w-3" />
               </button>
@@ -201,6 +203,9 @@ function CourseKeySelect({
 }
 
 function CombinationCourseItem({ course }: { course: Course }) {
+  const tCommon = useTranslations("Common");
+  const tDays = useTranslations("Days");
+
   return (
     <div className="flex items-start gap-2 py-1.5 text-sm">
       <div className="min-w-0 flex-1">
@@ -215,7 +220,9 @@ function CombinationCourseItem({ course }: { course: Course }) {
             {course.Section}
           </Badge>
           <span className="text-[10px] text-muted-foreground">
-            {course.Credits} cr
+            {tCommon("credits", {
+              count: Number.parseFloat(course.Credits),
+            })}
           </span>
         </div>
         <p className="mt-0.5 line-clamp-1 text-xs font-medium">
@@ -224,13 +231,16 @@ function CombinationCourseItem({ course }: { course: Course }) {
         <div className="mt-0.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-[10px] text-muted-foreground">
           <span className="flex items-center gap-0.5">
             <User className="h-2.5 w-2.5" />
-            {getInstructorDisplayName(course.Instructor)}
+            {getInstructorDisplayName(
+              course.Instructor,
+              tCommon("unassigned"),
+            )}
           </span>
           <span className="flex items-center gap-0.5">
             <Clock className="h-2.5 w-2.5" />
             {course.Schedule.map(
               (schedule) =>
-                `${schedule.day.slice(0, 3)} ${schedule.time}`,
+                `${tDays(`${schedule.day}Short`)} ${schedule.time}`,
             ).join(", ")}
           </span>
         </div>
@@ -240,6 +250,8 @@ function CombinationCourseItem({ course }: { course: Course }) {
 }
 
 export function AutoFitSection({ allCourses, onApply }: AutoFitSectionProps) {
+  const t = useTranslations("AutoFit");
+  const tCommon = useTranslations("Common");
   const [mandatoryCourseKeys, setMandatoryCourseKeys] = useState<string[]>([]);
   const [optionalCourseKeys, setOptionalCourseKeys] = useState<string[]>([]);
   const [maxCredits, setMaxCredits] = useState(
@@ -278,9 +290,11 @@ export function AutoFitSection({ allCourses, onApply }: AutoFitSectionProps) {
 
       if (normalized.droppedEntries > 0) {
         window.setTimeout(() => {
-          toast.warning("Review saved Auto Fit courses", {
+          toast.warning(t("migrationTitle"), {
             id: "autofit-migration-warning",
-            description: `${normalized.droppedEntries} saved course ${normalized.droppedEntries === 1 ? "entry was" : "entries were"} removed because it was missing, ambiguous, duplicated, or no longer eligible.`,
+            description: t("migrationDescription", {
+              count: normalized.droppedEntries,
+            }),
             duration: 8000,
             closeButton: true,
           });
@@ -291,7 +305,7 @@ export function AutoFitSection({ allCourses, onApply }: AutoFitSectionProps) {
     } finally {
       setIsLoaded(true);
     }
-  }, [allCourses]);
+  }, [allCourses, t]);
 
   useEffect(() => {
     if (!isLoaded) {
@@ -393,7 +407,8 @@ export function AutoFitSection({ allCourses, onApply }: AutoFitSectionProps) {
 
       setIsRunning(false);
       if ("error" in event.data) {
-        setErrorMessage(event.data.error);
+        console.error("Auto Fit worker failed:", event.data.error);
+        setErrorMessage(t("workerFailed"));
         setResult(null);
         return;
       }
@@ -403,13 +418,13 @@ export function AutoFitSection({ allCourses, onApply }: AutoFitSectionProps) {
       event.preventDefault();
       setIsRunning(false);
       setResult(null);
-      setErrorMessage("The Auto Fit worker failed. Please try again.");
+      setErrorMessage(t("workerFailed"));
       worker.terminate();
       workerRef.current = null;
     };
     workerRef.current = worker;
     return worker;
-  }, []);
+  }, [t]);
 
   const handleAutoFit = useCallback(() => {
     const requestId = activeRequestIdRef.current + 1;
@@ -450,6 +465,28 @@ export function AutoFitSection({ allCourses, onApply }: AutoFitSectionProps) {
   );
 
   const isLimitReached = result?.status === "limit-reached";
+  const resultMessage = useMemo(() => {
+    if (!result?.message) {
+      return null;
+    }
+
+    switch (result.message.code) {
+      case "invalid-max-credits":
+        return t("invalidMaxCredits");
+      case "missing-mandatory":
+        return t("missingMandatory", {
+          courses: result.message.courses.join(", "),
+        });
+      case "limit-with-results":
+        return t("limitWithResults");
+      case "limit-without-results":
+        return t("limitWithoutResults");
+      case "mandatory-infeasible":
+        return t("mandatoryInfeasible");
+      case "no-optional-fit":
+        return t("noOptionalFit");
+    }
+  }, [result?.message, t]);
 
   return (
     <section className="mt-8">
@@ -457,28 +494,25 @@ export function AutoFitSection({ allCourses, onApply }: AutoFitSectionProps) {
         <CardHeader>
           <div className="flex items-center gap-2">
             <Wand2 className="h-5 w-5 text-primary" />
-            <CardTitle className="text-xl">Auto Fit Schedule</CardTitle>
+            <CardTitle className="text-xl">{t("title")}</CardTitle>
           </div>
           <CardDescription>
-            Choose required and optional courses, then generate deterministic,
-            conflict-free weekly schedules that fit the most optional courses.
+            {t("description")}
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
           <div className="flex items-start gap-3 rounded-lg border border-yellow-500/40 bg-yellow-50 px-4 py-3 text-sm text-yellow-800 dark:border-yellow-500/30 dark:bg-yellow-950/40 dark:text-yellow-200">
             <TriangleAlert className="mt-0.5 h-4 w-4 shrink-0 text-yellow-600 dark:text-yellow-400" />
             <p>
-              Don&apos;t trust this tool 100%. Double-check the generated
-              schedule and verify that its sections match your desired learning
-              pathway.
+              {t("warning")}
             </p>
           </div>
 
           <div className="grid gap-6 md:grid-cols-2">
             <CourseKeySelect
-              label="Mandatory Courses"
+              label={t("mandatoryCourses")}
               icon={Star}
-              placeholder="Select mandatory courses..."
+              placeholder={t("mandatoryPlaceholder")}
               options={mandatoryOptions}
               selectedKeys={mandatoryCourseKeys}
               onToggle={toggleMandatory}
@@ -486,9 +520,9 @@ export function AutoFitSection({ allCourses, onApply }: AutoFitSectionProps) {
               disabled={isRunning || !isLoaded}
             />
             <CourseKeySelect
-              label="Optional Elective Courses"
+              label={t("optionalCourses")}
               icon={ListPlus}
-              placeholder="Select optional elective courses..."
+              placeholder={t("optionalPlaceholder")}
               options={optionalOptions}
               selectedKeys={optionalCourseKeys}
               onToggle={toggleOptional}
@@ -499,7 +533,7 @@ export function AutoFitSection({ allCourses, onApply }: AutoFitSectionProps) {
 
           <div className="flex flex-col items-stretch gap-4 sm:flex-row sm:items-end">
             <div className="space-y-2 sm:w-48">
-              <Label htmlFor="auto-fit-max-credits">Max Total Credits</Label>
+              <Label htmlFor="auto-fit-max-credits">{t("maxCredits")}</Label>
               <Input
                 id="auto-fit-max-credits"
                 type="number"
@@ -518,7 +552,7 @@ export function AutoFitSection({ allCourses, onApply }: AutoFitSectionProps) {
             </div>
             <div className="space-y-2 sm:w-48">
               <Label htmlFor="auto-fit-num-combinations">
-                Number of Combinations
+                {t("combinationCount")}
               </Label>
               <Input
                 id="auto-fit-num-combinations"
@@ -548,13 +582,16 @@ export function AutoFitSection({ allCourses, onApply }: AutoFitSectionProps) {
             >
               {isRunning ? (
                 <>
-                  <Spinner className="h-4 w-4" />
-                  Generating...
+                  <Spinner
+                    className="h-4 w-4"
+                    aria-label={t("generating")}
+                  />
+                  {t("generating")}
                 </>
               ) : (
                 <>
                   <Sparkles className="h-4 w-4" />
-                  Auto Fit
+                  {t("generate")}
                 </>
               )}
             </Button>
@@ -568,7 +605,7 @@ export function AutoFitSection({ allCourses, onApply }: AutoFitSectionProps) {
             </div>
           )}
 
-          {result?.message && (
+          {resultMessage && (
             <div
               className={cn(
                 "rounded-lg border p-4",
@@ -585,7 +622,8 @@ export function AutoFitSection({ allCourses, onApply }: AutoFitSectionProps) {
                     : "text-yellow-700 dark:text-yellow-400",
                 )}
               >
-                {result.message} Explored {result.exploredNodes.toLocaleString()} search nodes.
+                {resultMessage}{" "}
+                {t("exploredNodes", { count: result?.exploredNodes ?? 0 })}
               </p>
             </div>
           )}
@@ -596,15 +634,17 @@ export function AutoFitSection({ allCourses, onApply }: AutoFitSectionProps) {
               <div className="flex flex-wrap items-center gap-2">
                 <h3 className="flex items-center gap-2 text-lg font-semibold">
                   <Sparkles className="h-4 w-4 text-primary" />
-                  {result.combinations.length} Schedule Option
-                  {result.combinations.length === 1 ? "" : "s"}
+                  {t("scheduleOptions", {
+                    count: result.combinations.length,
+                  })}
                 </h3>
                 <Badge variant={isLimitReached ? "secondary" : "default"}>
-                  {isLimitReached ? "Best found" : "Optimal"}
+                  {isLimitReached ? t("bestFound") : t("optimal")}
                 </Badge>
                 <span className="text-sm text-muted-foreground">
-                  {result.bestOptionalCount ?? 0} optional course
-                  {result.bestOptionalCount === 1 ? "" : "s"} included
+                  {t("optionalIncluded", {
+                    count: result.bestOptionalCount ?? 0,
+                  })}
                 </span>
               </div>
 
@@ -628,12 +668,17 @@ export function AutoFitSection({ allCourses, onApply }: AutoFitSectionProps) {
                       <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
                         <div className="flex items-center gap-2">
                           <Badge variant={isApplied ? "default" : "secondary"}>
-                            Option {index + 1}
+                            {t("option", { number: index + 1 })}
                           </Badge>
                           <span className="text-sm text-muted-foreground">
-                            {combination.length} course
-                            {combination.length === 1 ? "" : "s"} •{" "}
-                            {totalCredits} credits
+                            {t("optionSummary", {
+                              courses: tCommon("courses", {
+                                count: combination.length,
+                              }),
+                              credits: tCommon("credits", {
+                                count: totalCredits,
+                              }),
+                            })}
                           </span>
                         </div>
                         <Button
@@ -645,12 +690,11 @@ export function AutoFitSection({ allCourses, onApply }: AutoFitSectionProps) {
                         >
                           {isApplied ? (
                             <>
-                              <Check className="h-3.5 w-3.5" /> Applied
+                              <Check className="h-3.5 w-3.5" /> {t("applied")}
                             </>
                           ) : (
                             <>
-                              <ArrowRight className="h-3.5 w-3.5" /> Apply
-                              Schedule
+                              <ArrowRight className="h-3.5 w-3.5" /> {t("apply")}
                             </>
                           )}
                         </Button>

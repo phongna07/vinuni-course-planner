@@ -34,12 +34,20 @@ export interface AutoFitInput {
 
 export type AutoFitStatus = "optimal" | "infeasible" | "limit-reached";
 
+export type AutoFitMessage =
+  | { code: "invalid-max-credits" }
+  | { code: "missing-mandatory"; courses: string[] }
+  | { code: "limit-with-results" }
+  | { code: "limit-without-results" }
+  | { code: "mandatory-infeasible" }
+  | { code: "no-optional-fit" };
+
 export interface AutoFitResult {
   combinations: Course[][];
   status: AutoFitStatus;
   bestOptionalCount: number | null;
   exploredNodes: number;
-  message?: string;
+  message?: AutoFitMessage;
 }
 
 export interface AutoFitWorkerRequest {
@@ -128,7 +136,7 @@ export function autoFitSchedule(input: AutoFitInput): AutoFitResult {
       status: "infeasible",
       bestOptionalCount: null,
       exploredNodes: 0,
-      message: "Maximum credits must be a positive number.",
+      message: { code: "invalid-max-credits" },
     };
   }
 
@@ -184,7 +192,7 @@ export function autoFitSchedule(input: AutoFitInput): AutoFitResult {
       status: "infeasible",
       bestOptionalCount: null,
       exploredNodes: 0,
-      message: `Could not find schedulable positive-credit sections for: ${missingMandatory.join(", ")}.`,
+      message: { code: "missing-mandatory", courses: missingMandatory },
     };
   }
 
@@ -481,8 +489,8 @@ export function autoFitSchedule(input: AutoFitInput): AutoFitResult {
       exploredNodes,
       message:
         bestOptionalCount >= 0
-          ? "The search limit was reached. These schedules are valid best-so-far results, but optimality was not proven."
-          : "The search limit was reached before a feasible schedule was found. Infeasibility was not proven.",
+          ? { code: "limit-with-results" }
+          : { code: "limit-without-results" },
     };
   }
 
@@ -492,8 +500,7 @@ export function autoFitSchedule(input: AutoFitInput): AutoFitResult {
       status: "infeasible",
       bestOptionalCount: null,
       exploredNodes,
-      message:
-        "The mandatory courses cannot be placed within the timetable and credit constraints.",
+      message: { code: "mandatory-infeasible" },
     };
   }
 
@@ -503,8 +510,7 @@ export function autoFitSchedule(input: AutoFitInput): AutoFitResult {
       status: "optimal",
       bestOptionalCount: 0,
       exploredNodes,
-      message:
-        "No requested optional course fits within the timetable and credit constraints.",
+      message: { code: "no-optional-fit" },
     };
   }
 

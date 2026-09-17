@@ -2,8 +2,8 @@
 
 import Image from "next/image";
 import { Coffee, TriangleAlert } from "lucide-react";
+import { useTranslations } from "next-intl";
 
-import { APP_CONFIG } from "@/config";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -17,26 +17,27 @@ import {
 } from "@/components/ui/dialog";
 
 export function SupportProjectButton() {
+  const t = useTranslations("Support");
+  const tCommon = useTranslations("Common");
+
   return (
     <Dialog>
       <DialogTrigger asChild>
         <Button
           size="sm"
           className="rounded-full shadow-sm"
-          aria-label="Buy me a coffee"
+          aria-label={t("title")}
         >
           <Coffee className="size-4.5" strokeWidth={2.25} />
-          <span className="hidden md:inline">Buy me a coffee</span>
+          <span className="hidden md:inline">{t("title")}</span>
         </Button>
       </DialogTrigger>
 
-      <DialogContent className="sm:max-w-md">
+      <DialogContent className="sm:max-w-md" closeLabel={tCommon("close")}>
         <DialogHeader>
-          <DialogTitle>Buy me a coffee</DialogTitle>
+          <DialogTitle>{t("title")}</DialogTitle>
           <DialogDescription className="leading-relaxed">
-            {APP_CONFIG.site.name} is completely free to use. If you find it
-            helpful, an optional contribution can help cover the domain,
-            hosting, and ongoing maintenance.
+            {t("description")}
           </DialogDescription>
         </DialogHeader>
 
@@ -44,7 +45,7 @@ export function SupportProjectButton() {
           <div className="mx-auto w-fit overflow-hidden rounded-lg border bg-white p-2 shadow-sm">
             <Image
               src="/qr-code.jpg"
-              alt={`Bank transfer QR code for supporting ${APP_CONFIG.site.name}`}
+              alt={t("qrAlt")}
               width={1154}
               height={1281}
               className="max-h-[55vh] w-auto max-w-full object-contain"
@@ -52,7 +53,7 @@ export function SupportProjectButton() {
             />
           </div>
           <figcaption className="text-center text-sm font-medium">
-            Scan the QR code with your banking app to make a transfer.
+            {t("scanQr")}
           </figcaption>
         </figure>
 
@@ -62,14 +63,13 @@ export function SupportProjectButton() {
             aria-hidden="true"
           />
           <p>
-            Supporting the project is entirely optional and does not unlock any
-            additional features. Thank you for helping keep it available.
+            {t("optional")}
           </p>
         </div>
 
         <DialogFooter>
           <DialogClose asChild>
-            <Button variant="outline">Close</Button>
+            <Button variant="outline">{tCommon("close")}</Button>
           </DialogClose>
         </DialogFooter>
       </DialogContent>

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { FileText, Copy, Check } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -28,6 +29,8 @@ interface ViewListButtonProps {
 
 export function ViewListButton({ courses }: ViewListButtonProps) {
   const [copied, setCopied] = useState(false);
+  const t = useTranslations("ViewList");
+  const tCommon = useTranslations("Common");
   const noCourses = courses.length === 0;
 
   // Generate the text content for the courses
@@ -64,37 +67,36 @@ export function ViewListButton({ courses }: ViewListButtonProps) {
                   size="sm"
                   className="gap-2"
                   disabled={noCourses}
+                  aria-label={t("button")}
                 >
                   <FileText className="h-4 w-4" />
-                  <span className="hidden sm:inline">View List</span>
+                  <span className="hidden sm:inline">{t("button")}</span>
                 </Button>
               </DialogTrigger>
             </span>
           </TooltipTrigger>
           <TooltipContent>
             <p>
-              {noCourses
-                ? "Add courses to view list"
-                : "View course list as text"}
+              {noCourses ? t("addCourses") : t("tooltip")}
             </p>
           </TooltipContent>
         </Tooltip>
       </TooltipProvider>
 
-      <DialogContent className="sm:max-w-[500px]">
+      <DialogContent
+        className="sm:max-w-[500px]"
+        closeLabel={tCommon("close")}
+      >
         <DialogHeader>
-          <DialogTitle>Course List</DialogTitle>
-          <DialogDescription>
-            Your selected courses in text format. Copy and paste this list
-            anywhere.
-          </DialogDescription>
+          <DialogTitle>{t("title")}</DialogTitle>
+          <DialogDescription>{t("description")}</DialogDescription>
         </DialogHeader>
 
         <Textarea
           value={courseListText}
           readOnly
           className="min-h-[200px] font-mono text-sm resize-none"
-          placeholder="No courses selected"
+          placeholder={t("empty")}
         />
 
         <DialogFooter className="gap-2 sm:gap-0">
@@ -102,17 +104,17 @@ export function ViewListButton({ courses }: ViewListButtonProps) {
             {copied ? (
               <>
                 <Check className="h-4 w-4" />
-                Copied!
+                {t("copied")}
               </>
             ) : (
               <>
                 <Copy className="h-4 w-4" />
-                Copy to Clipboard
+                {t("copy")}
               </>
             )}
           </Button>
           <DialogClose asChild>
-            <Button variant="default">Close</Button>
+            <Button variant="default">{tCommon("close")}</Button>
           </DialogClose>
         </DialogFooter>
       </DialogContent>

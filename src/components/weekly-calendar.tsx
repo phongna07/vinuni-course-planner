@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo } from "react";
+import { useTranslations } from "next-intl";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import {
@@ -34,6 +35,9 @@ interface CalendarBlock {
 
 export function WeeklyCalendar({ courses }: WeeklyCalendarProps) {
   const isMobile = useIsMobile();
+  const t = useTranslations("Schedule");
+  const tCommon = useTranslations("Common");
+  const tDays = useTranslations("Days");
   const visibleDays = useMemo(
     () => getVisibleCalendarDays(courses),
     [courses]
@@ -98,7 +102,7 @@ export function WeeklyCalendar({ courses }: WeeklyCalendarProps) {
     return (
       <Card>
         <CardHeader className="pb-3">
-          <CardTitle className="text-lg">Weekly Schedule</CardTitle>
+          <CardTitle className="text-lg">{t("weekly")}</CardTitle>
         </CardHeader>
         <CardContent className="p-4 pt-0">
           <AgendaView courses={courses} days={visibleDays} />
@@ -111,7 +115,7 @@ export function WeeklyCalendar({ courses }: WeeklyCalendarProps) {
   return (
     <Card className="min-w-0">
       <CardHeader className="pb-3">
-        <CardTitle className="text-lg">Weekly Schedule</CardTitle>
+        <CardTitle className="text-lg">{t("weekly")}</CardTitle>
       </CardHeader>
       <CardContent className="p-0 sm:p-6 sm:pt-0">
         <ScrollArea className="w-full min-w-0 max-w-full">
@@ -132,8 +136,10 @@ export function WeeklyCalendar({ courses }: WeeklyCalendarProps) {
                   key={day}
                   className="h-10 flex items-center justify-center font-medium text-sm bg-muted rounded-md"
                 >
-                  <span className="hidden sm:inline">{day}</span>
-                  <span className="sm:hidden">{day.slice(0, 3)}</span>
+                  <span className="hidden sm:inline">{tDays(day)}</span>
+                  <span className="sm:hidden">
+                    {tDays(`${day}Short`)}
+                  </span>
                 </div>
               ))}
             </div>
@@ -199,8 +205,9 @@ export function WeeklyCalendar({ courses }: WeeklyCalendarProps) {
                         title={`${block.course.Course} - ${
                           block.course["Course Title"]
                         }\n${getInstructorDisplayName(
-                          block.course.Instructor
-                        )}\n${block.slot.day} ${timeRange}`}
+                          block.course.Instructor,
+                          tCommon("unassigned"),
+                        )}\n${tDays(block.slot.day as (typeof DAYS_OF_WEEK)[number])} ${timeRange}`}
                       >
                         <div className="truncate text-[10px] leading-tight">
                           {block.course["Course Title"]}
@@ -224,7 +231,7 @@ export function WeeklyCalendar({ courses }: WeeklyCalendarProps) {
         {/* Legend */}
         {courses.length > 0 && (
           <div className="mt-4 px-4 sm:px-0">
-            <h5 className="text-sm font-medium mb-2">Legend</h5>
+            <h5 className="text-sm font-medium mb-2">{t("legend")}</h5>
             <div className="flex flex-wrap gap-2">
               {courses.map((course) => (
                 <div
@@ -252,9 +259,9 @@ export function WeeklyCalendar({ courses }: WeeklyCalendarProps) {
         {/* Empty state */}
         {courses.length === 0 && (
           <div className="text-center py-12 text-muted-foreground">
-            <p>No scheduled courses to display.</p>
+            <p>{t("empty")}</p>
             <p className="text-sm mt-1">
-              Add courses with schedules to see them on the calendar.
+              {t("emptyHelp")}
             </p>
           </div>
         )}

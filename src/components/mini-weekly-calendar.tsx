@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo } from "react";
+import { useTranslations } from "next-intl";
 
 import {
   formatTime,
@@ -31,6 +32,8 @@ function formatCompactHour(hour: number): string {
 }
 
 export function MiniWeeklyCalendar({ courses }: MiniWeeklyCalendarProps) {
+  const t = useTranslations("Schedule");
+  const tDays = useTranslations("Days");
   const visibleDays = useMemo(
     () => getVisibleCalendarDays(courses),
     [courses],
@@ -69,9 +72,9 @@ export function MiniWeeklyCalendar({ courses }: MiniWeeklyCalendarProps) {
   const totalHours = calendarRange.endHour - calendarRange.startHour;
 
   return (
-    <figure className="min-w-0" aria-label="Weekly schedule preview">
+    <figure className="min-w-0" aria-label={t("weeklyPreviewLabel")}>
       <figcaption className="mb-2 text-xs font-medium text-muted-foreground">
-        Weekly preview
+        {t("weeklyPreview")}
       </figcaption>
       <div
         className="grid gap-0.5"
@@ -84,9 +87,9 @@ export function MiniWeeklyCalendar({ courses }: MiniWeeklyCalendarProps) {
           <div
             key={day}
             className="flex h-6 items-center justify-center rounded-sm bg-muted px-0.5 text-[9px] font-medium text-muted-foreground"
-            title={day}
+            title={tDays(day)}
           >
-            {day.slice(0, 3)}
+            {tDays(`${day}Short`)}
           </div>
         ))}
 
@@ -136,7 +139,7 @@ export function MiniWeeklyCalendar({ courses }: MiniWeeklyCalendarProps) {
                 block.slot.endHour,
                 block.slot.endMinute,
               )}`;
-              const description = `${block.course.Course} - ${block.course["Course Title"]} (${block.course.Section}), ${block.slot.day} ${timeRange}`;
+              const description = `${block.course.Course} - ${block.course["Course Title"]} (${block.course.Section}), ${tDays(block.slot.day as (typeof visibleDays)[number])} ${timeRange}`;
 
               return (
                 <div

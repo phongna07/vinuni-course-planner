@@ -1,43 +1,35 @@
-import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Script from "next/script";
+import { AbstractIntlMessages, NextIntlClientProvider } from "next-intl";
+
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 import { APP_CONFIG } from "@/config";
-import "./globals.css";
+import { APP_TIME_ZONE, Locale } from "@/i18n/config";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
-  subsets: ["latin"],
+  subsets: ["latin", "latin-ext"],
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
-  subsets: ["latin"],
+  subsets: ["latin", "latin-ext"],
 });
 
-export const metadata: Metadata = {
-  title: APP_CONFIG.site.name,
-  description: APP_CONFIG.site.description,
-  openGraph: {
-    images: [
-      {
-        url: "/preview.png",
-        width: 2425,
-        height: 1541,
-        alt: `${APP_CONFIG.site.name} preview`,
-      },
-    ],
-  },
-};
-
-export default function RootLayout({
-  children,
-}: Readonly<{
+interface LocalizedLayoutProps {
   children: React.ReactNode;
-}>) {
+  locale: Locale;
+  messages: AbstractIntlMessages;
+}
+
+export function LocalizedLayout({
+  children,
+  locale,
+  messages,
+}: LocalizedLayoutProps) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang={locale} suppressHydrationWarning>
       <head>
         <Script
           src={`https://www.googletagmanager.com/gtag/js?id=${APP_CONFIG.analytics.googleMeasurementId}`}
@@ -55,15 +47,21 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
+        <NextIntlClientProvider
+          locale={locale}
+          messages={messages}
+          timeZone={APP_TIME_ZONE}
         >
-          <Toaster position="bottom-right" richColors />
-          {children}
-        </ThemeProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <Toaster position="bottom-right" richColors />
+            {children}
+          </ThemeProvider>
+        </NextIntlClientProvider>
       </body>
     </html>
   );

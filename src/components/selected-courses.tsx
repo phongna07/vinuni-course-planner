@@ -2,6 +2,7 @@
 
 import { useLayoutEffect, useRef, useState } from "react";
 import { X, AlertTriangle, Clock, User, Calendar } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -31,6 +32,10 @@ function CourseCard({
   course: SelectedCourse;
   onRemove: () => void;
 }) {
+  const t = useTranslations("SelectedCourses");
+  const tCommon = useTranslations("Common");
+  const tDays = useTranslations("Days");
+
   return (
     <div
       className={`w-full max-w-full min-w-0 overflow-hidden rounded-lg border p-3 ${
@@ -55,7 +60,9 @@ function CourseCard({
               {course.Section}
             </Badge>
             <Badge variant="secondary" className="text-xs">
-              {course.Credits} cr
+              {tCommon("credits", {
+                count: Number.parseFloat(course.Credits),
+              })}
             </Badge>
           </div>
           <h4 className="mb-2 max-w-full whitespace-normal break-words text-sm font-medium [overflow-wrap:anywhere]">
@@ -65,7 +72,10 @@ function CourseCard({
             <div className="flex min-w-0 items-start gap-1">
               <User className="h-3 w-3 shrink-0" />
               <span className="min-w-0 max-w-full whitespace-normal break-words [overflow-wrap:anywhere]">
-                {getInstructorDisplayName(course.Instructor)}
+                {getInstructorDisplayName(
+                  course.Instructor,
+                  tCommon("unassigned"),
+                )}
               </span>
             </div>
             <div className="flex min-w-0 items-start gap-1">
@@ -78,7 +88,8 @@ function CourseCard({
               <Clock className="h-3 w-3 shrink-0 mt-0.5" />
               <span className="min-w-0 max-w-full whitespace-normal break-words [overflow-wrap:anywhere]">
                 {course.Schedule.map(
-                  (s) => `${s.day.slice(0, 3)} ${s.time}`
+                  (schedule) =>
+                    `${tDays(`${schedule.day}Short`)} ${schedule.time}`,
                 ).join(", ")}
               </span>
             </div>
@@ -87,7 +98,7 @@ function CourseCard({
             <div className="mt-2 flex min-w-0 items-start gap-1 text-xs text-red-600 dark:text-red-400">
               <AlertTriangle className="h-3 w-3 shrink-0" />
               <span className="min-w-0 max-w-full whitespace-normal break-words [overflow-wrap:anywhere]">
-                Conflicts with: {course.conflictsWith.join(", ")}
+                {t("conflictsWith")} {course.conflictsWith.join(", ")}
               </span>
             </div>
           )}
@@ -99,7 +110,7 @@ function CourseCard({
           onClick={onRemove}
         >
           <X className="h-4 w-4" />
-          <span className="sr-only">Remove course</span>
+          <span className="sr-only">{t("remove")}</span>
         </Button>
       </div>
     </div>
@@ -117,6 +128,8 @@ export function SelectedCourses({
   const contentRef = useRef<HTMLDivElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
   const [desktopListHeight, setDesktopListHeight] = useState<number>();
+  const t = useTranslations("SelectedCourses");
+  const tCommon = useTranslations("Common");
   const totalCredits = calculateTotalCredits(courses);
   const conflictCount = courses.filter((c) => c.hasConflict).length;
   const hasCourses = courses.length > 0;
@@ -190,11 +203,11 @@ export function SelectedCourses({
     return (
       <Card>
         <CardHeader>
-          <CardTitle className="text-lg">Selected Courses</CardTitle>
+          <CardTitle className="text-lg">{t("title")}</CardTitle>
         </CardHeader>
         <CardContent>
           <p className="text-sm text-muted-foreground text-center py-8">
-            No courses selected. Use the search above to add courses.
+            {t("empty")}
           </p>
         </CardContent>
       </Card>
@@ -209,19 +222,21 @@ export function SelectedCourses({
       <Card ref={cardRef} className="lg:max-h-full lg:overflow-hidden">
         <CardHeader ref={headerRef} className="pb-3">
           <div className="flex items-center justify-between">
-            <CardTitle className="text-lg">Selected Courses</CardTitle>
+            <CardTitle className="text-lg">{t("title")}</CardTitle>
             <Button variant="outline" size="sm" onClick={onClearAll}>
-              Clear All
+              {t("clearAll")}
             </Button>
           </div>
           <div className="flex flex-wrap gap-2 mt-2">
             <Badge variant="secondary">
-              {courses.length} course{courses.length !== 1 ? "s" : ""}
+              {tCommon("courses", { count: courses.length })}
             </Badge>
-            <Badge variant="secondary">{totalCredits} credits</Badge>
+            <Badge variant="secondary">
+              {tCommon("credits", { count: totalCredits })}
+            </Badge>
             {conflictCount > 0 && (
               <Badge variant="destructive">
-                {conflictCount} conflict{conflictCount !== 1 ? "s" : ""}
+                {t("conflicts", { count: conflictCount })}
               </Badge>
             )}
           </div>

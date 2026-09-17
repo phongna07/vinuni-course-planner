@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Clock } from "lucide-react";
+import { useFormatter, useTranslations } from "next-intl";
 import { APP_CONFIG } from "@/config";
 
 const TARGET_DATE = new Date(APP_CONFIG.countdown.targetDateTime);
@@ -9,30 +10,6 @@ const TARGET_DATE = new Date(APP_CONFIG.countdown.targetDateTime);
 if (Number.isNaN(TARGET_DATE.getTime())) {
   throw new Error("APP_CONFIG.countdown.targetDateTime must be a valid date");
 }
-
-function formatTargetDate(date: Date): string {
-  const formatter = new Intl.DateTimeFormat(APP_CONFIG.countdown.locale, {
-    timeZone: APP_CONFIG.countdown.timeZone,
-    month: "long",
-    day: "numeric",
-    year: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: true,
-    timeZoneName: "shortOffset",
-  });
-  const parts = formatter.formatToParts(date);
-  const getPart = (type: Intl.DateTimeFormatPartTypes) =>
-    parts.find((part) => part.type === type)?.value ?? "";
-
-  const dateLabel = `${getPart("month")} ${getPart("day")}, ${getPart("year")}`;
-  const timeLabel = `${getPart("hour")}:${getPart("minute")} ${getPart("dayPeriod")}`;
-  const timeZoneLabel = getPart("timeZoneName");
-
-  return `${dateLabel} • ${timeLabel} (${timeZoneLabel})`;
-}
-
-const TARGET_DATE_LABEL = formatTargetDate(TARGET_DATE);
 
 interface TimeLeft {
   days: number;
@@ -58,26 +35,42 @@ function calculateTimeLeft(): TimeLeft {
 }
 
 export function CountdownTimer() {
-  const [timeLeft, setTimeLeft] = useState<TimeLeft>(calculateTimeLeft());
-  const [mounted, setMounted] = useState(false);
+  const [timeLeft, setTimeLeft] = useState<TimeLeft | null>(null);
+  const format = useFormatter();
+  const t = useTranslations("Countdown");
+  const tHome = useTranslations("Home");
 
   useEffect(() => {
-    setMounted(true);
-    const timer = setInterval(() => {
+    const update = () => {
       setTimeLeft(calculateTimeLeft());
-    }, 1000);
+    };
+    const initialTimer = window.setTimeout(update, 0);
+    const timer = window.setInterval(update, 1000);
 
-    return () => clearInterval(timer);
+    return () => {
+      window.clearTimeout(initialTimer);
+      window.clearInterval(timer);
+    };
   }, []);
 
+  const targetDateLabel = format.dateTime(TARGET_DATE, {
+    timeZone: APP_CONFIG.countdown.timeZone,
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    timeZoneName: "short",
+  });
+
   // Prevent hydration mismatch
-  if (!mounted) {
+  if (!timeLeft) {
     return (
       <div className="mt-6 p-6 rounded-xl bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-pink-500/10 border border-border/50 backdrop-blur-sm">
         <div className="flex items-center justify-center gap-2 mb-4">
           <Clock className="h-5 w-5 text-primary animate-pulse" />
           <h3 className="text-lg font-semibold">
-            {APP_CONFIG.countdown.loadingMessage}
+            {t("loading")}
           </h3>
         </div>
       </div>
@@ -96,7 +89,7 @@ export function CountdownTimer() {
         <div className="flex items-center justify-center gap-2">
           <span className="text-2xl">🎉</span>
           <h3 className="text-xl font-bold text-green-600 dark:text-green-400">
-            {APP_CONFIG.countdown.expiredMessage}
+            {t("expired", { term: tHome("termName") })}
           </h3>
           <span className="text-2xl">🎉</span>
         </div>
@@ -109,22 +102,22 @@ export function CountdownTimer() {
       <div className="flex items-center justify-center gap-2 mb-4">
         <Clock className="h-5 w-5 text-primary animate-pulse" />
         <h3 className="text-lg font-semibold">
-          {APP_CONFIG.countdown.heading}
+          {t("heading")}
         </h3>
       </div>
 
       <div className="flex items-center justify-center gap-3 md:gap-6">
-        <TimeUnit value={timeLeft.days} label="Days" />
+        <TimeUnit value={timeLeft.days} label={t("days")} />
         <Separator />
-        <TimeUnit value={timeLeft.hours} label="Hours" />
+        <TimeUnit value={timeLeft.hours} label={t("hours")} />
         <Separator />
-        <TimeUnit value={timeLeft.minutes} label="Minutes" />
+        <TimeUnit value={timeLeft.minutes} label={t("minutes")} />
         <Separator />
-        <TimeUnit value={timeLeft.seconds} label="Seconds" />
+        <TimeUnit value={timeLeft.seconds} label={t("seconds")} />
       </div>
 
       <p className="text-center text-sm text-muted-foreground mt-4">
-        {TARGET_DATE_LABEL}
+        {targetDateLabel}
       </p>
     </div>
   );

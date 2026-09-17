@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback, useMemo } from "react";
+import { useTranslations } from "next-intl";
 import { DayOfWeek, DAYS_OF_WEEK } from "@/types/course";
 import { APP_CONFIG } from "@/config";
 
@@ -17,32 +18,33 @@ export interface CourseFilters {
 }
 
 export interface TimePreset {
-  label: string;
   days?: Partial<Record<DayOfWeek, boolean>>;
   startHour?: number | null;
   endHour?: number | null;
 }
 
-export const TIME_PRESETS: Record<string, TimePreset> = {
+export type TimePresetKey =
+  | "morning"
+  | "afternoon"
+  | "evening"
+  | "noEarly"
+  | "weekdays";
+
+export const TIME_PRESETS: Record<TimePresetKey, TimePreset> = {
   morning: {
-    label: "Morning Only",
     endHour: 12,
   },
   afternoon: {
-    label: "Afternoon Only",
     startHour: 12,
     endHour: 17,
   },
   evening: {
-    label: "Evening Only",
     startHour: 17,
   },
   noEarly: {
-    label: "No 8AM Classes",
     startHour: 9,
   },
   weekdays: {
-    label: "Weekdays Only",
     days: { Saturday: false, Sunday: false },
   },
 };
@@ -67,21 +69,29 @@ const DEFAULT_FILTERS: CourseFilters = {
 export function useCourseFilters() {
   const [filters, setFilters] = useState<CourseFilters>(DEFAULT_FILTERS);
   const [isLoaded, setIsLoaded] = useState(false);
+  const t = useTranslations("Filters");
+  const tDays = useTranslations("Days");
 
   // Load from localStorage on mount
   useEffect(() => {
-    try {
-      const stored = localStorage.getItem(APP_CONFIG.storageKeys.courseFilters);
-      if (stored) {
-        const parsed = JSON.parse(stored) as CourseFilters;
-        // Ensure all days exist (in case of schema changes)
-        const days = { ...DEFAULT_DAYS, ...parsed.days };
-        setFilters({ ...parsed, days });
+    const loadTimer = window.setTimeout(() => {
+      try {
+        const stored = localStorage.getItem(
+          APP_CONFIG.storageKeys.courseFilters,
+        );
+        if (stored) {
+          const parsed = JSON.parse(stored) as CourseFilters;
+          // Ensure all days exist (in case of schema changes)
+          const days = { ...DEFAULT_DAYS, ...parsed.days };
+          setFilters({ ...parsed, days });
+        }
+      } catch (error) {
+        console.error("Failed to load filters from localStorage:", error);
       }
-    } catch (error) {
-      console.error("Failed to load filters from localStorage:", error);
-    }
-    setIsLoaded(true);
+      setIsLoaded(true);
+    }, 0);
+
+    return () => window.clearTimeout(loadTimer);
   }, []);
 
   // Save to localStorage whenever filters change
@@ -117,10 +127,16 @@ export function useCourseFilters() {
 
     if (inactiveDays.length > 0 && inactiveDays.length <= 3) {
       // Show which days are excluded if only a few
-      parts.push(`No ${inactiveDays.map((d) => d.slice(0, 3)).join(", ")}`);
+      parts.push(
+        t("excludedDays", {
+          days: inactiveDays.map((day) => tDays(`${day}Short`)).join(", "),
+        }),
+      );
     } else if (activeDays.length > 0 && activeDays.length <= 3) {
       // Show which days are included if only a few
-      parts.push(activeDays.map((d) => d.slice(0, 3)).join(", "));
+      parts.push(
+        activeDays.map((day) => tDays(`${day}Short`)).join(", "),
+      );
     }
 
     // Time filters
@@ -128,27 +144,27 @@ export function useCourseFilters() {
       const hour = filters.timeRange.startHour;
       const period = hour >= 12 ? "PM" : "AM";
       const displayHour = hour % 12 || 12;
-      parts.push(`After ${displayHour}${period}`);
+      parts.push(t("afterTime", { time: `${displayHour}${period}` }));
     }
     if (filters.timeRange.endHour !== null) {
       const hour = filters.timeRange.endHour;
       const period = hour >= 12 ? "PM" : "AM";
       const displayHour = hour % 12 || 12;
-      parts.push(`Before ${displayHour}${period}`);
+      parts.push(t("beforeTime", { time: `${displayHour}${period}` }));
     }
 
     return parts.join(", ");
-  }, [filters]);
+  }, [filters, t, tDays]);
 
   // Apply a preset
   const applyPreset = useCallback((presetKey: string | null) => {
-    if (!presetKey || !TIME_PRESETS[presetKey]) {
+    if (!presetKey || !(presetKey in TIME_PRESETS)) {
       // Clear preset and reset to defaults
       setFilters(DEFAULT_FILTERS);
       return;
     }
 
-    const preset = TIME_PRESETS[presetKey];
+    const preset = TIME_PRESETS[presetKey as TimePresetKey];
     setFilters({
       days: {
         ...DEFAULT_DAYS,

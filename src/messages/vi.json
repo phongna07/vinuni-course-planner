@@ -1,0 +1,178 @@
+{
+  "Common": {
+    "close": "Đóng",
+    "loading": "Đang tải...",
+    "unassigned": "Chưa phân công",
+    "credits": "{count} tín chỉ",
+    "courses": "{count} môn học"
+  },
+  "Navigation": {
+    "changeLanguage": "Đổi ngôn ngữ",
+    "english": "English",
+    "vietnamese": "Tiếng Việt"
+  },
+  "Theme": {
+    "toggle": "Đổi giao diện",
+    "light": "Sáng",
+    "dark": "Tối",
+    "system": "Theo hệ thống"
+  },
+  "Home": {
+    "termName": "Học kỳ Thu 2026",
+    "noticeTitle": "Lưu ý về dữ liệu môn học:",
+    "notice": "Lịch học được cập nhật lần cuối vào {lastUpdated} (giờ Việt Nam). Lịch học có thể thay đổi bất cứ lúc nào. Bạn nên kiểm tra lại thông tin môn học trên VinUniDigi trước khi hoàn tất đăng ký.",
+    "searchHeading": "Tìm môn học cho {term} (Tổng cộng: {count} môn)",
+    "searchHelp": "Tìm theo mã môn, tên môn hoặc giảng viên. Nhấp để thêm vào thời khóa biểu.",
+    "loadingSavedCourses": "Đang tải các môn đã lưu...",
+    "footerText": "Công cụ lập kế hoạch môn học VinUni • Lập thời khóa biểu học kỳ của bạn",
+    "disclaimer": "Đây là dự án độc lập, không chính thức, không trực thuộc, được chứng thực hoặc vận hành bởi VinUniversity. Thông tin môn học có thể chưa đầy đủ hoặc đã lỗi thời; hãy luôn xác minh lịch học, yêu cầu và thông tin đăng ký qua các kênh chính thức của VinUniversity. Nhóm duy trì dự án không chịu trách nhiệm cho các quyết định được đưa ra dựa trên thông tin từ công cụ này."
+  },
+  "CourseSelector": {
+    "trigger": "Tìm kiếm môn học...",
+    "placeholder": "Tìm theo mã môn, tên môn, giảng viên hoặc thời gian...",
+    "noFilterMatches": "Không có môn học nào phù hợp với bộ lọc.",
+    "resetFilters": "Đặt lại bộ lọc",
+    "noCourses": "Không tìm thấy môn học.",
+    "conflictsWith": "Trùng lịch với: {courses}"
+  },
+  "Filters": {
+    "title": "Bộ lọc",
+    "quickPresets": "Bộ lọc nhanh",
+    "selectPreset": "Chọn bộ lọc nhanh...",
+    "days": "Ngày học",
+    "timeRange": "Khung giờ",
+    "after": "Sau",
+    "before": "Trước",
+    "any": "Bất kỳ",
+    "options": "Tùy chọn",
+    "hideConflicts": "Ẩn các môn bị trùng lịch",
+    "reset": "Đặt lại bộ lọc",
+    "morning": "Chỉ buổi sáng",
+    "afternoon": "Chỉ buổi chiều",
+    "evening": "Chỉ buổi tối",
+    "noEarly": "Không học lúc 8 giờ sáng",
+    "weekdays": "Chỉ ngày trong tuần",
+    "excludedDays": "Không có {days}",
+    "afterTime": "Sau {time}",
+    "beforeTime": "Trước {time}"
+  },
+  "Days": {
+    "Monday": "Thứ Hai",
+    "Tuesday": "Thứ Ba",
+    "Wednesday": "Thứ Tư",
+    "Thursday": "Thứ Năm",
+    "Friday": "Thứ Sáu",
+    "Saturday": "Thứ Bảy",
+    "Sunday": "Chủ Nhật",
+    "MondayShort": "T2",
+    "TuesdayShort": "T3",
+    "WednesdayShort": "T4",
+    "ThursdayShort": "T5",
+    "FridayShort": "T6",
+    "SaturdayShort": "T7",
+    "SundayShort": "CN",
+    "MondayNarrow": "T2",
+    "TuesdayNarrow": "T3",
+    "WednesdayNarrow": "T4",
+    "ThursdayNarrow": "T5",
+    "FridayNarrow": "T6",
+    "SaturdayNarrow": "T7",
+    "SundayNarrow": "CN"
+  },
+  "SelectedCourses": {
+    "title": "Môn học đã chọn",
+    "empty": "Chưa chọn môn học nào. Hãy dùng ô tìm kiếm phía trên để thêm môn.",
+    "clearAll": "Xóa tất cả",
+    "summary": "{courses} • {credits}{conflicts, plural, =0 {} other { • {conflicts} môn trùng lịch}}",
+    "conflicts": "{count} môn trùng lịch",
+    "conflictsWith": "Trùng lịch với:",
+    "remove": "Xóa môn học"
+  },
+  "Schedule": {
+    "weekly": "Thời khóa biểu tuần",
+    "weeklyPreview": "Xem trước thời khóa biểu",
+    "weeklyPreviewLabel": "Bản xem trước thời khóa biểu tuần",
+    "conflict": "Trùng lịch",
+    "noClasses": "Không có lớp",
+    "legend": "Chú thích",
+    "empty": "Chưa có môn học nào để hiển thị.",
+    "emptyHelp": "Hãy thêm các môn có lịch học để xem trên thời khóa biểu."
+  },
+  "Countdown": {
+    "heading": "Đăng ký môn học sẽ mở sau",
+    "loading": "Đang tải...",
+    "expired": "Đăng ký môn học cho {term} đã mở!",
+    "days": "Ngày",
+    "hours": "Giờ",
+    "minutes": "Phút",
+    "seconds": "Giây"
+  },
+  "PlanningDisclaimer": {
+    "title": "Lưu ý quan trọng về việc lập kế hoạch",
+    "alertTitle": "Chỉ dùng để lập kế hoạch",
+    "alertDescription": "Việc chọn môn học trên trang web này chỉ giúp bạn lập thời khóa biểu, không đồng nghĩa với việc đã ghi danh hoặc đăng ký môn trên VinUniDigi. Bạn vẫn phải hoàn tất đăng ký môn học chính thức trên hệ thống VinUniDigi.",
+    "acknowledge": "Tôi đã hiểu"
+  },
+  "Support": {
+    "title": "Mời tôi một ly cà phê",
+    "description": "VinUni Course Planner hoàn toàn miễn phí. Nếu công cụ hữu ích với bạn, một khoản ủng hộ tự nguyện sẽ giúp chi trả tên miền, dịch vụ lưu trữ và công việc bảo trì.",
+    "qrAlt": "Mã QR chuyển khoản để ủng hộ VinUni Course Planner",
+    "scanQr": "Quét mã QR bằng ứng dụng ngân hàng để chuyển khoản.",
+    "optional": "Việc ủng hộ dự án hoàn toàn tự nguyện và không mở khóa thêm tính năng nào. Cảm ơn bạn đã góp phần duy trì dự án."
+  },
+  "ViewList": {
+    "button": "Xem danh sách",
+    "addCourses": "Thêm môn học để xem danh sách",
+    "tooltip": "Xem danh sách môn học dưới dạng văn bản",
+    "title": "Danh sách môn học",
+    "description": "Các môn bạn đã chọn ở dạng văn bản. Bạn có thể sao chép và dán danh sách này ở bất cứ đâu.",
+    "empty": "Chưa chọn môn học",
+    "copied": "Đã sao chép!",
+    "copy": "Sao chép"
+  },
+  "ExportCalendar": {
+    "button": "Xuất tệp lịch (.ics)",
+    "addCourses": "Thêm môn học để xuất lịch",
+    "resolveConflicts": "Hãy xử lý các môn trùng lịch trước khi xuất",
+    "tooltip": "Bạn có thể nhập tệp này vào Outlook Calendar"
+  },
+  "AutoFit": {
+    "selectedCount": "Đã chọn {count} môn",
+    "searchPlaceholder": "Tìm theo tên hoặc mã môn...",
+    "noCourses": "Không tìm thấy môn học.",
+    "removeCourse": "Xóa {course}",
+    "migrationTitle": "Kiểm tra lại các môn Auto Fit đã lưu",
+    "migrationDescription": "Đã xóa {count} mục môn học đã lưu vì môn đó không còn tồn tại, không rõ ràng, bị trùng hoặc không còn đủ điều kiện.",
+    "workerFailed": "Không thể chạy Auto Fit. Vui lòng thử lại.",
+    "title": "Tự động xếp lịch",
+    "description": "Chọn các môn bắt buộc và tự chọn, sau đó tạo các thời khóa biểu tuần không trùng lịch và có nhiều môn tự chọn nhất.",
+    "warning": "Không nên tin tưởng công cụ này tuyệt đối. Hãy kiểm tra lại thời khóa biểu được tạo và bảo đảm các lớp học phần phù hợp với lộ trình học tập của bạn.",
+    "mandatoryCourses": "Môn học bắt buộc",
+    "mandatoryPlaceholder": "Chọn môn học bắt buộc...",
+    "optionalCourses": "Môn học tự chọn",
+    "optionalPlaceholder": "Chọn môn học tự chọn...",
+    "maxCredits": "Tổng tín chỉ tối đa",
+    "combinationCount": "Số phương án",
+    "generating": "Đang tạo...",
+    "generate": "Tự động xếp lịch",
+    "exploredNodes": "Đã duyệt {count, number} nút tìm kiếm.",
+    "scheduleOptions": "{count} phương án thời khóa biểu",
+    "bestFound": "Tốt nhất đã tìm thấy",
+    "optimal": "Tối ưu",
+    "optionalIncluded": "Bao gồm {count} môn tự chọn",
+    "option": "Phương án {number}",
+    "optionSummary": "{courses} • {credits}",
+    "applied": "Đã áp dụng",
+    "apply": "Áp dụng thời khóa biểu",
+    "invalidMaxCredits": "Số tín chỉ tối đa phải là một số dương.",
+    "missingMandatory": "Không tìm thấy lớp học phần có lịch và tín chỉ hợp lệ cho: {courses}.",
+    "limitWithResults": "Đã đạt giới hạn tìm kiếm. Đây là các phương án hợp lệ tốt nhất đã tìm thấy, nhưng chưa chứng minh được tính tối ưu.",
+    "limitWithoutResults": "Đã đạt giới hạn tìm kiếm trước khi tìm được phương án khả thi. Chưa thể kết luận rằng không có phương án.",
+    "mandatoryInfeasible": "Không thể xếp các môn bắt buộc trong giới hạn thời khóa biểu và tín chỉ.",
+    "noOptionalFit": "Không có môn tự chọn nào được yêu cầu phù hợp với giới hạn thời khóa biểu và tín chỉ."
+  },
+  "Toasts": {
+    "savedCoursesChanged": "Dữ liệu môn học đã lưu đã thay đổi",
+    "outdatedCoursesRemoved": "Đã xóa {count} môn lỗi thời khỏi danh sách đã lưu. Vui lòng kiểm tra lại thời khóa biểu."
+  }
+}

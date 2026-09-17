@@ -1,0 +1,178 @@
+{
+  "Common": {
+    "close": "Close",
+    "loading": "Loading...",
+    "unassigned": "Unassigned",
+    "credits": "{count, plural, one {# credit} other {# credits}}",
+    "courses": "{count, plural, one {# course} other {# courses}}"
+  },
+  "Navigation": {
+    "changeLanguage": "Change language",
+    "english": "English",
+    "vietnamese": "Tiếng Việt"
+  },
+  "Theme": {
+    "toggle": "Toggle theme",
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
+  },
+  "Home": {
+    "termName": "Fall 2026 Semester",
+    "noticeTitle": "Course Data Notice:",
+    "notice": "The course schedule was last updated on {lastUpdated} (Vietnam time). Please note that schedules may change at any time. We recommend double-checking course information on VinUniDigi before finalizing your registration.",
+    "searchHeading": "Search Courses for {term} ({count, plural, one {Total: # course} other {Total: # courses}})",
+    "searchHelp": "Search by course code, title, or instructor name. Click to add to your schedule.",
+    "loadingSavedCourses": "Loading saved courses...",
+    "footerText": "VinUni Course Planning Tool • Plan your semester schedule",
+    "disclaimer": "This is an independent, unofficial project and is not affiliated with, endorsed by, or operated by VinUniversity. Course information may be incomplete or outdated, so always verify schedules, requirements, and registration details through official VinUniversity channels. The project maintainers are not responsible for decisions made based on information provided by this tool."
+  },
+  "CourseSelector": {
+    "trigger": "Search for courses...",
+    "placeholder": "Search by course code, title, instructor, or time...",
+    "noFilterMatches": "No courses match your filters.",
+    "resetFilters": "Reset filters",
+    "noCourses": "No courses found.",
+    "conflictsWith": "Conflicts with: {courses}"
+  },
+  "Filters": {
+    "title": "Filters",
+    "quickPresets": "Quick Presets",
+    "selectPreset": "Select a preset...",
+    "days": "Days",
+    "timeRange": "Time Range",
+    "after": "After",
+    "before": "Before",
+    "any": "Any",
+    "options": "Options",
+    "hideConflicts": "Hide conflicting courses",
+    "reset": "Reset Filters",
+    "morning": "Morning Only",
+    "afternoon": "Afternoon Only",
+    "evening": "Evening Only",
+    "noEarly": "No 8AM Classes",
+    "weekdays": "Weekdays Only",
+    "excludedDays": "No {days}",
+    "afterTime": "After {time}",
+    "beforeTime": "Before {time}"
+  },
+  "Days": {
+    "Monday": "Monday",
+    "Tuesday": "Tuesday",
+    "Wednesday": "Wednesday",
+    "Thursday": "Thursday",
+    "Friday": "Friday",
+    "Saturday": "Saturday",
+    "Sunday": "Sunday",
+    "MondayShort": "Mon",
+    "TuesdayShort": "Tue",
+    "WednesdayShort": "Wed",
+    "ThursdayShort": "Thu",
+    "FridayShort": "Fri",
+    "SaturdayShort": "Sat",
+    "SundayShort": "Sun",
+    "MondayNarrow": "Mo",
+    "TuesdayNarrow": "Tu",
+    "WednesdayNarrow": "We",
+    "ThursdayNarrow": "Th",
+    "FridayNarrow": "Fr",
+    "SaturdayNarrow": "Sa",
+    "SundayNarrow": "Su"
+  },
+  "SelectedCourses": {
+    "title": "Selected Courses",
+    "empty": "No courses selected. Use the search above to add courses.",
+    "clearAll": "Clear All",
+    "summary": "{courses} • {credits}{conflicts, plural, =0 {} other { • {conflicts, plural, one {# conflict} other {# conflicts}}}}",
+    "conflicts": "{count, plural, one {# conflict} other {# conflicts}}",
+    "conflictsWith": "Conflicts with:",
+    "remove": "Remove course"
+  },
+  "Schedule": {
+    "weekly": "Weekly Schedule",
+    "weeklyPreview": "Weekly preview",
+    "weeklyPreviewLabel": "Weekly schedule preview",
+    "conflict": "Conflict",
+    "noClasses": "No classes",
+    "legend": "Legend",
+    "empty": "No scheduled courses to display.",
+    "emptyHelp": "Add courses with schedules to see them on the calendar."
+  },
+  "Countdown": {
+    "heading": "Course Registration Opens In",
+    "loading": "Loading...",
+    "expired": "Course Registration for {term} is Open!",
+    "days": "Days",
+    "hours": "Hours",
+    "minutes": "Minutes",
+    "seconds": "Seconds"
+  },
+  "PlanningDisclaimer": {
+    "title": "Important planning disclaimer",
+    "alertTitle": "Planning tool only",
+    "alertDescription": "Selecting courses on this website only helps you plan a schedule. It does not enroll or register you for courses on VinUniDigi. You must complete your official course registration separately on the VinUniDigi system.",
+    "acknowledge": "I understand"
+  },
+  "Support": {
+    "title": "Buy me a coffee",
+    "description": "VinUni Course Planner is completely free to use. If you find it helpful, an optional contribution can help cover the domain, hosting, and ongoing maintenance.",
+    "qrAlt": "Bank transfer QR code for supporting VinUni Course Planner",
+    "scanQr": "Scan the QR code with your banking app to make a transfer.",
+    "optional": "Supporting the project is entirely optional and does not unlock any additional features. Thank you for helping keep it available."
+  },
+  "ViewList": {
+    "button": "View List",
+    "addCourses": "Add courses to view list",
+    "tooltip": "View course list as text",
+    "title": "Course List",
+    "description": "Your selected courses in text format. Copy and paste this list anywhere.",
+    "empty": "No courses selected",
+    "copied": "Copied!",
+    "copy": "Copy to Clipboard"
+  },
+  "ExportCalendar": {
+    "button": "Export calendar file (.ics)",
+    "addCourses": "Add courses to export",
+    "resolveConflicts": "Resolve conflicts before exporting",
+    "tooltip": "You can import this file into Outlook Calendar"
+  },
+  "AutoFit": {
+    "selectedCount": "{count, plural, one {# course selected} other {# courses selected}}",
+    "searchPlaceholder": "Search by title or course code...",
+    "noCourses": "No courses found.",
+    "removeCourse": "Remove {course}",
+    "migrationTitle": "Review saved Auto Fit courses",
+    "migrationDescription": "{count, plural, one {# saved course entry was removed} other {# saved course entries were removed}} because it was missing, ambiguous, duplicated, or no longer eligible.",
+    "workerFailed": "The Auto Fit worker failed. Please try again.",
+    "title": "Auto Fit Schedule",
+    "description": "Choose required and optional courses, then generate deterministic, conflict-free weekly schedules that fit the most optional courses.",
+    "warning": "Don't trust this tool 100%. Double-check the generated schedule and verify that its sections match your desired learning pathway.",
+    "mandatoryCourses": "Mandatory Courses",
+    "mandatoryPlaceholder": "Select mandatory courses...",
+    "optionalCourses": "Optional Elective Courses",
+    "optionalPlaceholder": "Select optional elective courses...",
+    "maxCredits": "Max Total Credits",
+    "combinationCount": "Number of Combinations",
+    "generating": "Generating...",
+    "generate": "Auto Fit",
+    "exploredNodes": "Explored {count, number} search nodes.",
+    "scheduleOptions": "{count, plural, one {# Schedule Option} other {# Schedule Options}}",
+    "bestFound": "Best found",
+    "optimal": "Optimal",
+    "optionalIncluded": "{count, plural, one {# optional course included} other {# optional courses included}}",
+    "option": "Option {number}",
+    "optionSummary": "{courses} • {credits}",
+    "applied": "Applied",
+    "apply": "Apply Schedule",
+    "invalidMaxCredits": "Maximum credits must be a positive number.",
+    "missingMandatory": "Could not find schedulable positive-credit sections for: {courses}.",
+    "limitWithResults": "The search limit was reached. These schedules are valid best-so-far results, but optimality was not proven.",
+    "limitWithoutResults": "The search limit was reached before a feasible schedule was found. Infeasibility was not proven.",
+    "mandatoryInfeasible": "The mandatory courses cannot be placed within the timetable and credit constraints.",
+    "noOptionalFit": "No requested optional course fits within the timetable and credit constraints."
+  },
+  "Toasts": {
+    "savedCoursesChanged": "Saved course data changed",
+    "outdatedCoursesRemoved": "{count, plural, one {# outdated course was removed} other {# outdated courses were removed}} from your saved selection. Please review your schedule."
+  }
+}
