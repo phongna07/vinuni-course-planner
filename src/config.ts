@@ -27,5 +27,7 @@ export const APP_CONFIG = {
     selectedCourses: "vinuni-selected-courses",
     courseFilters: "vinuni-course-filters",
     autoFit: "vinuni-autofit-config",
+    planningDisclaimerAcknowledged:
+      "vinuni-planning-disclaimer-acknowledged",
   },
 } as const;

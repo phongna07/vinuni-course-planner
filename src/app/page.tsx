@@ -20,6 +20,7 @@ import { SupportProjectButton } from "@/components/support-project-button";
 import { ExportCalendarButton } from "@/components/export-calendar-button";
 import { ViewListButton } from "@/components/view-list-button";
 import { AutoFitSection } from "@/components/auto-fit-section";
+import { PlanningDisclaimerDialog } from "@/components/planning-disclaimer-dialog";
 import { APP_CONFIG, TERM_NAME } from "@/config";
 
 const courses = coursesData as Course[];
@@ -71,6 +72,8 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-background">
+      <PlanningDisclaimerDialog />
+
       {/* Header */}
       <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container mx-auto flex h-14 items-center justify-between px-4">
