@@ -1602,25 +1602,6 @@
     {
         "Course": "ENGL1030",
         "Course Title": "Academic and Professional Writing",
-        "Section": "APWFA261",
-        "Dates": "9/21/2026 to 1/20/2027",
-        "Credits": "2.00",
-        "Instructor": "Nhữ Đình Ngọc Anh",
-        "Delivery Method": "Classroom",
-        "Schedule": [
-            {
-                "day": "Monday",
-                "time": "9:00AM to 9:50AM"
-            },
-            {
-                "day": "Wednesday",
-                "time": "9:00AM to 9:50AM"
-            }
-        ]
-    },
-    {
-        "Course": "ENGL1030",
-        "Course Title": "Academic and Professional Writing",
         "Section": "APWFA2610",
         "Dates": "9/21/2026 to 1/18/2027",
         "Credits": "2.00",
@@ -6061,66 +6042,6 @@
             {
                 "day": "Thursday",
                 "time": "10:00AM to 12:50PM"
-            }
-        ]
-    },
-    {
-        "Course": "STAT2020",
-        "Course Title": "Business Statistics",
-        "Section": "BSTFA261",
-        "Dates": "9/24/2026 to 12/31/2026",
-        "Credits": "3.00",
-        "Instructor": "Đỗ Bảo Linh",
-        "Delivery Method": "Classroom",
-        "Schedule": [
-            {
-                "day": "Thursday",
-                "time": "9:00AM to 12:00PM"
-            }
-        ]
-    },
-    {
-        "Course": "STAT2020",
-        "Course Title": "Business Statistics",
-        "Section": "BSTFA262",
-        "Dates": "9/25/2026 to 1/1/2027",
-        "Credits": "3.00",
-        "Instructor": "Đỗ Bảo Linh",
-        "Delivery Method": "Classroom",
-        "Schedule": [
-            {
-                "day": "Friday",
-                "time": "9:00AM to 12:00PM"
-            }
-        ]
-    },
-    {
-        "Course": "STAT2020",
-        "Course Title": "Business Statistics",
-        "Section": "BSTFA263",
-        "Dates": "9/25/2026 to 1/1/2027",
-        "Credits": "3.00",
-        "Instructor": "Đỗ Bảo Linh",
-        "Delivery Method": "Classroom",
-        "Schedule": [
-            {
-                "day": "Friday",
-                "time": "1:30PM to 4:30PM"
-            }
-        ]
-    },
-    {
-        "Course": "STAT2020",
-        "Course Title": "Business Statistics",
-        "Section": "BSTFA264",
-        "Dates": "9/21/2026 to 12/28/2026",
-        "Credits": "3.00",
-        "Instructor": "Nguyen Thanh Cong",
-        "Delivery Method": "Classroom",
-        "Schedule": [
-            {
-                "day": "Monday",
-                "time": "1:30PM to 4:30PM"
             }
         ]
     },
