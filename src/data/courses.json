@@ -45,6 +45,21 @@
         ]
     },
     {
+        "Course": "ACCT2010",
+        "Course Title": "Introduction to Financial Accounting",
+        "Section": "IFAFA264",
+        "Dates": "9/24/2026 to 12/31/2026",
+        "Credits": "3.00",
+        "Instructor": "Nguyen Van Anh",
+        "Delivery Method": "Classroom",
+        "Schedule": [
+            {
+                "day": "Thursday",
+                "time": "9:00AM to 12:00PM"
+            }
+        ]
+    },
+    {
         "Course": "ACCT2020",
         "Course Title": "Introduction to Managerial Accounting",
         "Section": "IMAFA261",
@@ -1602,6 +1617,25 @@
     {
         "Course": "ENGL1030",
         "Course Title": "Academic and Professional Writing",
+        "Section": "APWFA261",
+        "Dates": "9/14/2026 to 1/13/2027",
+        "Credits": "2.00",
+        "Instructor": "Nhữ Đình Ngọc Anh",
+        "Delivery Method": "Hybrid",
+        "Schedule": [
+            {
+                "day": "Monday",
+                "time": "9:00AM to 9:50AM"
+            },
+            {
+                "day": "Wednesday",
+                "time": "9:00AM to 9:50AM"
+            }
+        ]
+    },
+    {
+        "Course": "ENGL1030",
+        "Course Title": "Academic and Professional Writing",
         "Section": "APWFA2610",
         "Dates": "9/21/2026 to 1/18/2027",
         "Credits": "2.00",
@@ -1652,10 +1686,10 @@
         "Course": "ENGL1030",
         "Course Title": "Academic and Professional Writing",
         "Section": "APWFA263",
-        "Dates": "9/21/2026 to 1/20/2027",
+        "Dates": "9/14/2026 to 1/13/2027",
         "Credits": "2.00",
         "Instructor": "Nhữ Đình Ngọc Anh",
-        "Delivery Method": "Classroom",
+        "Delivery Method": "Hybrid",
         "Schedule": [
             {
                 "day": "Monday",
@@ -1671,10 +1705,10 @@
         "Course": "ENGL1030",
         "Course Title": "Academic and Professional Writing",
         "Section": "APWFA264",
-        "Dates": "9/22/2026 to 1/21/2027",
+        "Dates": "9/15/2026 to 1/14/2027",
         "Credits": "2.00",
         "Instructor": "Losavio Antonio Martin",
-        "Delivery Method": "Classroom",
+        "Delivery Method": "Hybrid",
         "Schedule": [
             {
                 "day": "Tuesday",
@@ -1712,7 +1746,7 @@
         "Dates": "9/21/2026 to 1/20/2027",
         "Credits": "2.00",
         "Instructor": "Losavio Antonio Martin",
-        "Delivery Method": "Classroom",
+        "Delivery Method": "Hybrid",
         "Schedule": [
             {
                 "day": "Monday",
@@ -2022,6 +2056,21 @@
         ]
     },
     {
+        "Course": "HASS1010",
+        "Course Title": "Marxism-Leninism Philosophy",
+        "Section": "MLPFA264",
+        "Dates": "9/21/2026 to 12/28/2026",
+        "Credits": "3.00",
+        "Instructor": "Nguyễn Văn Tài",
+        "Delivery Method": "Classroom",
+        "Schedule": [
+            {
+                "day": "Monday",
+                "time": "3:30PM to 5:30PM"
+            }
+        ]
+    },
+    {
         "Course": "HASS1020",
         "Course Title": "Marxism-Leninism Political Economy",
         "Section": "MPEFA261",
@@ -2153,6 +2202,21 @@
             {
                 "day": "Monday",
                 "time": "9:00AM to 1:00PM"
+            }
+        ]
+    },
+    {
+        "Course": "HASS1030",
+        "Course Title": "Scientific Socialism",
+        "Section": "SCSFA265",
+        "Dates": "9/21/2026 to 12/28/2026",
+        "Credits": "2.00",
+        "Instructor": "Nguyễn Thị Hoa",
+        "Delivery Method": "Classroom",
+        "Schedule": [
+            {
+                "day": "Monday",
+                "time": "3:30PM to 5:30PM"
             }
         ]
     },
@@ -2521,6 +2585,21 @@
         ]
     },
     {
+        "Course": "LAW1010",
+        "Course Title": "Introduction to Law",
+        "Section": "INLFA263",
+        "Dates": "9/22/2026 to 12/29/2026",
+        "Credits": "2.00",
+        "Instructor": "Đăng Minh Tuấn",
+        "Delivery Method": "Classroom",
+        "Schedule": [
+            {
+                "day": "Tuesday",
+                "time": "2:00PM to 3:30PM"
+            }
+        ]
+    },
+    {
         "Course": "LAW2010",
         "Course Title": "Business Law",
         "Section": "BULFA261",
@@ -2606,6 +2685,21 @@
         "Schedule": [
             {
                 "day": "Tuesday",
+                "time": "1:30PM to 4:30PM"
+            }
+        ]
+    },
+    {
+        "Course": "MANA1011",
+        "Course Title": "Introduction to Managing Skills",
+        "Section": "IMSFA264",
+        "Dates": "9/28/2026 to 12/28/2026",
+        "Credits": "2.00",
+        "Instructor": "Kramer Marc David",
+        "Delivery Method": "Classroom",
+        "Schedule": [
+            {
+                "day": "Monday",
                 "time": "1:30PM to 4:30PM"
             }
         ]
@@ -6016,6 +6110,21 @@
         ]
     },
     {
+        "Course": "PSYC4070",
+        "Course Title": "Psychological Assessment and Consultation",
+        "Section": "PACFA261",
+        "Dates": "9/24/2026 to 12/24/2026",
+        "Credits": "3.00",
+        "Instructor": "Ahamad Salman Amathullah",
+        "Delivery Method": "Classroom",
+        "Schedule": [
+            {
+                "day": "Thursday",
+                "time": "9:00AM to 11:50AM"
+            }
+        ]
+    },
+    {
         "Course": "STAT1011",
         "Course Title": "Statistics for Social Sciences",
         "Section": "SSSFA261",
@@ -6042,6 +6151,81 @@
             {
                 "day": "Thursday",
                 "time": "10:00AM to 12:50PM"
+            }
+        ]
+    },
+    {
+        "Course": "STAT2020",
+        "Course Title": "Business Statistics",
+        "Section": "BSTFA261",
+        "Dates": "9/24/2026 to 12/31/2026",
+        "Credits": "3.00",
+        "Instructor": "Đỗ Bảo Linh",
+        "Delivery Method": "Classroom",
+        "Schedule": [
+            {
+                "day": "Thursday",
+                "time": "9:00AM to 12:00PM"
+            }
+        ]
+    },
+    {
+        "Course": "STAT2020",
+        "Course Title": "Business Statistics",
+        "Section": "BSTFA262",
+        "Dates": "9/25/2026 to 1/1/2027",
+        "Credits": "3.00",
+        "Instructor": "Đỗ Bảo Linh",
+        "Delivery Method": "Classroom",
+        "Schedule": [
+            {
+                "day": "Friday",
+                "time": "9:00AM to 12:00PM"
+            }
+        ]
+    },
+    {
+        "Course": "STAT2020",
+        "Course Title": "Business Statistics",
+        "Section": "BSTFA263",
+        "Dates": "9/25/2026 to 1/1/2027",
+        "Credits": "3.00",
+        "Instructor": "Đỗ Bảo Linh",
+        "Delivery Method": "Classroom",
+        "Schedule": [
+            {
+                "day": "Friday",
+                "time": "1:30PM to 4:30PM"
+            }
+        ]
+    },
+    {
+        "Course": "STAT2020",
+        "Course Title": "Business Statistics",
+        "Section": "BSTFA264",
+        "Dates": "9/21/2026 to 12/28/2026",
+        "Credits": "3.00",
+        "Instructor": "Nguyen Thanh Cong",
+        "Delivery Method": "Classroom",
+        "Schedule": [
+            {
+                "day": "Monday",
+                "time": "1:30PM to 4:30PM"
+            }
+        ]
+    },
+    {
+        "Course": "STAT2020",
+        "Course Title": "Business Statistics",
+        "Section": "BSTFA265",
+        "Dates": "9/28/2026 to 1/4/2027",
+        "Credits": "3.00",
+        "Instructor": "Nguyen Thanh Cong",
+        "Delivery Method": "Classroom",
+        "Schedule": [
+            {
+                "day": "Monday",
+                "time": "9:00AM to 12:00PM"
             }
         ]
     },
