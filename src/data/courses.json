@@ -6095,6 +6095,21 @@
         ]
     },
     {
+        "Course": "PSYC4011",
+        "Course Title": "Psychological Principles and Pedagogy",
+        "Section": "PPPFA261",
+        "Dates": "8/10/2026 to 1/4/2027",
+        "Credits": "3.00",
+        "Instructor": "Nguyen Duc Huy",
+        "Delivery Method": "Hybrid",
+        "Schedule": [
+            {
+                "day": "Monday",
+                "time": "9:00AM to 11:45AM"
+            }
+        ]
+    },
+    {
         "Course": "PSYC4041",
         "Course Title": "Employee Stress and Wellbeing",
         "Section": "ESWFA261",
